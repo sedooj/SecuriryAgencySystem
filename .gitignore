@@ -1,0 +1,13 @@
+[Bb]in/
+[Oo]bj/
+
+.idea/
+*.sln.iml
+
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+*.generated.cs
