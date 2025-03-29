@@ -1,8 +1,11 @@
+using Core.Model;
+
 namespace Core.Service.Interface;
 
 public interface IDutyScheduleService
 {
-    void CreateDutySchedule(int guardId, DateTime startDate, DateTime endDate);
-    void UpdateDutySchedule(int scheduleId, DateTime newStartDate, DateTime newEndDate);
-    void ReplaceShift(int scheduleId, int newEmployeeId, string reason);
+    void CreateDutySchedule(Guid guardId, DutySchedule schedule);
+    void UpdateDutySchedule(Guid guardId, DutySchedule schedule);
+    void DeleteDutySchedule(Guid guardId);
+    void ReplaceShift(Guid guardId, Guid newEmployeeId, string reason);
 }

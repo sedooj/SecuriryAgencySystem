@@ -38,13 +38,13 @@ public class ContractService : IContractService
     {
         if (clientType == typeof(IndividualClient))
         {
-            var client = _individualClientDbService.LoadEntity(clientId) ?? throw new NullReferenceException($"Individual client with id {clientId} not found");
+            var client = _individualClientDbService.LoadEntity(clientId) ?? throw new ArgumentException($"Individual client with id {clientId} not found");
             client.ContractId = contractId;
             _individualClientDbService.UpdateEntity(clientId, client);
         }
         else if (clientType == typeof(CorporateClient))
         {
-            var client = _corporateClientDbService.LoadEntity(clientId) ?? throw new NullReferenceException($"Corporate client with id {clientId} not found");
+            var client = _corporateClientDbService.LoadEntity(clientId) ?? throw new ArgumentException($"Corporate client with id {clientId} not found");
             client.ContractId = contractId;
             _corporateClientDbService.UpdateEntity(clientId, client);
         }
@@ -52,7 +52,7 @@ public class ContractService : IContractService
 
     public void LinkContractToPayment(Guid contractId, Guid paymentId)
     {
-        var contract = _contractDbService.LoadEntity(contractId) ?? throw new NullReferenceException($"Contract with id {contractId} not found");
+        var contract = _contractDbService.LoadEntity(contractId) ?? throw new ArgumentNullException($"Contract with id {contractId} not found");
         contract.PaymentId = paymentId;
         _contractDbService.UpdateEntity(contractId, contract);
     }
