@@ -1,4 +1,4 @@
-namespace SAS.Model;
+namespace Core.Model;
 
 public class Documents(string address, string inn)
 {

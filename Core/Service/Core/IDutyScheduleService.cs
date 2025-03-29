@@ -1,4 +1,4 @@
-namespace SAS.Service.Core;
+namespace Core.Service.Core;
 
 public interface IDutyScheduleService
 {

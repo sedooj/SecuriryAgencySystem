@@ -1,4 +1,4 @@
-namespace SAS.Service;
+namespace Core.Service;
 
 public interface IFinancialReportService
 {

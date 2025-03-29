@@ -1,6 +1,4 @@
-using SecurityAgencySystem.Model;
-
-namespace SAS.Model;
+namespace Core.Model;
 
 public class Employee(
     string name,

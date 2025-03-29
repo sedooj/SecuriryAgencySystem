@@ -1,4 +1,4 @@
-namespace SecurityAgencySystem.Model;
+namespace Core.Model;
 
 public class Weapon(string brand)
 {

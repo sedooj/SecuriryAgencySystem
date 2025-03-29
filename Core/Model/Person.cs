@@ -1,4 +1,4 @@
-namespace SAS.Model;
+namespace Core.Model;
 
 public abstract class Person(string name, string surname, string patronymic)
 {

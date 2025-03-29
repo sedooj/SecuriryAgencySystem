@@ -1,4 +1,4 @@
-namespace SAS.Model;
+namespace Core.Model;
 
 public class Contract(Guid clientId, DateTime startDate, DateTime endDate, decimal amount)
 {

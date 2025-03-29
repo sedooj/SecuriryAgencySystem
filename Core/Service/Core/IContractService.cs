@@ -1,6 +1,6 @@
-using SAS.Model;
+using Core.Model;
 
-namespace SAS.Service.Core;
+namespace Core.Service.Core;
 
 public interface IContractService
 {

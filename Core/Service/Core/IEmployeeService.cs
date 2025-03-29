@@ -1,7 +1,6 @@
-using SAS.Model;
-using SecurityAgencySystem.Model;
+using Core.Model;
 
-namespace SAS.Service.Core;
+namespace Core.Service.Core;
 
 public interface IEmployeeService
 {

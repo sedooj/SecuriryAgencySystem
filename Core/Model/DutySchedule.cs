@@ -1,4 +1,4 @@
-namespace SAS.Model;
+namespace Core.Model;
 
 public class DutySchedule(string scheduleType, Replacement? replacement, Schedule schedule)
 {
