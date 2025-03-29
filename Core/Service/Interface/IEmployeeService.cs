@@ -6,7 +6,10 @@ namespace Core.Service.Interface;
 public interface IEmployeeService
 {
     decimal CalculateSalary(Employee employee);
-    void ManageEmployeePosition(Employee employee, string position);
-    void AssignWeapon(Employee employee, Weapon weapon);
-    void AssignSpecialEquipment(Employee employee, Guid equipment);
+    void ManageEmployeeJobRole(Employee employee, JobRole jobRole);
+    void ManageEmployeeJobRole(Guardian guardian, JobRole jobRole);
+    void AssignWeapon(Guardian guardian, Guid weaponId);
+    void AssignSpecialEquipment(Guardian guardian, Guid equipment);
+    void UnassignWeapon(Guardian guardian, Guid weaponId);
+    void UnassignSpecialEquipment(Guardian guardian, Guid equipment);
 }

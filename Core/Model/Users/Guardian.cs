@@ -4,32 +4,32 @@ namespace Core.Model.Users;
 
 public class Guardian : Employee
 {
-    private List<Guid>? _specialEquipmentsIds;
+    private List<Guid>? _specialEquipments;
 
     public Guardian(Documents documents,
-        List<Guid>? specialEquipmentsIds, List<Weapon> weapons, DutySchedule? schedule, Guid? securingObjectId,
+        List<Guid>? specialEquipments, List<Guid> weapons, DutySchedule? schedule, Guid? securingObjectId,
         Passport passport) : base(
         passport, new JobRole("Security", Role.SecurityOfficer), documents)
     {
-        SpecialEquipmentsIds = specialEquipmentsIds;
+        SpecialEquipments = specialEquipments;
         Weapons = weapons;
         Schedule = schedule;
         SecuringObjectId = securingObjectId;
     }
 
-    public List<Weapon> Weapons { get; set; }
+    public List<Guid> Weapons { get; set; }
     public DutySchedule? Schedule { get; set; }
 
     public Guid? SecuringObjectId { get; set; }
 
-    public List<Guid>? SpecialEquipmentsIds
+    public List<Guid>? SpecialEquipments
     {
-        get => _specialEquipmentsIds;
+        get => _specialEquipments;
         set
         {
             if (JobRole.Role == Role.SecurityOfficer)
             {
-                _specialEquipmentsIds = value;
+                _specialEquipments = value;
             }
             else
             {

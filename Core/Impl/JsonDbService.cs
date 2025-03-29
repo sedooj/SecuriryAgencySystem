@@ -43,6 +43,21 @@ public class JsonDbService<T> : IDBService<T> where T : class
         }
         SaveEntitiesToFile(entities);
     }
+    
+    public void DeleteEntity(Guid id)
+    {
+        var entities = LoadEntities().ToList();
+        var entityToRemove = entities.FirstOrDefault(e => GetEntityId(e) == id);
+        if (entityToRemove != null)
+        {
+            entities.Remove(entityToRemove);
+            SaveEntitiesToFile(entities);
+        }
+        else
+        {
+            throw new InvalidOperationException($"Entity with id {id} not found.");
+        }
+    }
 
     private void SaveEntitiesToFile(List<T> entities)
     {
