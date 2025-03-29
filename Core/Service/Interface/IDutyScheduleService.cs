@@ -1,4 +1,4 @@
-namespace Core.Service.Core;
+namespace Core.Service.Interface;
 
 public interface IDutyScheduleService
 {
