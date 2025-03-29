@@ -1,4 +1,4 @@
-namespace SecurityAgencySystem.Model;
+namespace SAS.Model;
 
 public class Documents(string address, string inn)
 {

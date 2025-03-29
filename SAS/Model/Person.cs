@@ -1,4 +1,4 @@
-namespace SecurityAgencySystem.Model;
+namespace SAS.Model;
 
 public abstract class Person(string name, string surname, string patronymic)
 {

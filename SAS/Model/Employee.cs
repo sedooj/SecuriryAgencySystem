@@ -1,4 +1,6 @@
-namespace SecurityAgencySystem.Model;
+using SecurityAgencySystem.Model;
+
+namespace SAS.Model;
 
 public class Employee(
     string name,
