@@ -1,4 +1,3 @@
-using Core.Model;
 using Core.Model.Users;
 
 namespace Core.Service.Interface;

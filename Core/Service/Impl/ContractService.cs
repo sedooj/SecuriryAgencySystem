@@ -12,6 +12,8 @@ public class ContractService : IContractService
     private readonly IDBService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     private readonly IDBService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
     private readonly IDBService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
+
+    private readonly IPaymentService _paymentService = new PaymentService();
     
     public void CreateContract(Contract contract)
     {
@@ -50,10 +52,8 @@ public class ContractService : IContractService
         }
     }
 
-    public void LinkContractToPayment(Guid contractId, Guid paymentId)
+    public void PayContract(Guid contractId, Guid payerId, decimal amount)
     {
-        var contract = _contractDbService.LoadEntity(contractId) ?? throw new ArgumentNullException($"Contract with id {contractId} not found");
-        contract.PaymentId = paymentId;
-        _contractDbService.UpdateEntity(contractId, contract);
+        _paymentService.ProcessPayment(contractId, payerId, amount);
     }
 }

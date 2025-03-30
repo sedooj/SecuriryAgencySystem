@@ -1,4 +1,4 @@
-namespace Core.Service.Interface;
+namespace Core.Service.Interface.Report;
 
 public interface IDocumentGenerationService
 {
