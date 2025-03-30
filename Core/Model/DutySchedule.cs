@@ -5,7 +5,6 @@ public class DutySchedule(string scheduleType, Replacement? replacement, Schedul
     public string ScheduleType { get; set; } = scheduleType;
     public Replacement? Replacement { get; set; } = replacement;
     public Schedule Schedule { get; set; } = schedule;
-    
 }
 
 public class Schedule(DateTime startDate, DateTime endDate)
