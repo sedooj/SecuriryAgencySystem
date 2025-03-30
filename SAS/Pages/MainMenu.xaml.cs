@@ -7,9 +7,9 @@ public partial class MainMenu : ContentPage
         InitializeComponent();
     }
 
-    private void OnEmployeesButtonClicked(object sender, EventArgs e)
+    private async void OnEmployeesButtonClicked(object sender, EventArgs e)
     {
-        // Handle Employees button click
+        await Navigation.PushAsync(new EmployeesPage());
     }
 
     private void OnClientsButtonClicked(object sender, EventArgs e)

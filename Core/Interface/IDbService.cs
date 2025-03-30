@@ -1,6 +1,6 @@
 namespace Core.Interface;
 
-public interface IDBService<T> where T : class
+public interface IDbService<T> where T : class
 {
     List<T> LoadEntities();
     T? LoadEntity(Guid id);

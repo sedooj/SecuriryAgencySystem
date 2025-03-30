@@ -7,8 +7,8 @@ namespace Core.Service.Impl;
 
 public class ClientService : IClientService
 {
-    private readonly IDBService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
-    private readonly IDBService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
+    private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
+    private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     
     public void CreateClient(CorporateClient corporateClient)
     {

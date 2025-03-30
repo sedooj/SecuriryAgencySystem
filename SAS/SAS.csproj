@@ -65,8 +65,4 @@
         <ProjectReference Include="..\Core\Core.csproj"/>
     </ItemGroup>
     
-    <ItemGroup>
-      <AdditionalFiles Include="Pages\MainMenu.xaml" />
-    </ItemGroup>
-
 </Project>

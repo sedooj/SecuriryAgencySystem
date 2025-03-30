@@ -8,7 +8,7 @@ namespace Core.Service.Impl;
 
 public class DutyScheduleService : IDutyScheduleService
 {
-    private readonly IDBService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
+    private readonly IDbService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
 
 
     public void CreateDutySchedule(Guid guardId, DutySchedule schedule)

@@ -8,10 +8,10 @@ namespace Core.Service.Impl;
 
 public class ContractService : IContractService
 {
-    private readonly IDBService<Contract> _contractDbService = new JsonDbService<Contract>();
-    private readonly IDBService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
-    private readonly IDBService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
-    private readonly IDBService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
+    private readonly IDbService<Contract> _contractDbService = new JsonDbService<Contract>();
+    private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
+    private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
+    private readonly IDbService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
 
     private readonly IPaymentService _paymentService = new PaymentService();
     

@@ -19,9 +19,7 @@ public class PathBuilder
 
     private string GetDocumentsDirectory()
     {
-        var directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        var dbDir = Path.Combine(directoryPath, "SecurityAgencySystem");
-        return dbDir;
+        return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/SecurityAgencySystem/";
     }
 
     private string FindTableForType(Type type)

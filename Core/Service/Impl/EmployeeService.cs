@@ -8,8 +8,8 @@ namespace Core.Service.Impl;
 
 public class EmployeeService : IEmployeeService
 {
-    private readonly IDBService<Employee> _employeeDbService = new JsonDbService<Employee>();
-    private readonly IDBService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
+    private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
+    private readonly IDbService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
 
     public decimal CalculateSalary(Employee employee)
     {
