@@ -1,6 +1,7 @@
 using Core.Exception;
 using Core.Impl;
 using Core.Interface;
+using Core.Model;
 using Core.Model.Users;
 using Core.Service.Interface;
 
@@ -17,14 +18,6 @@ public class EmployeeService : IEmployeeService
 
     public void ManageEmployeeJobRole(Employee employee, JobRole jobRole)
     {
-        if (jobRole.Role == Role.SecurityOfficer)
-        {
-            var guardian = new Employee(employee.Passport, jobRole, employee.Documents);
-            _employeeDbService.SaveEntity(guardian);
-            _employeeDbService.DeleteEntity(employee.Id);
-            return;
-        }
-
         employee.JobRole = jobRole;
         _employeeDbService.UpdateEntity(employee.Id, employee);
     }

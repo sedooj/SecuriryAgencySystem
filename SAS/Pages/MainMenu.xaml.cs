@@ -1,4 +1,6 @@
+using SAS.Controller;
 using SAS.Pages.Clients;
+using SAS.Pages.Duties;
 using SAS.Pages.Employees;
 
 namespace SAS.Pages;
@@ -20,9 +22,9 @@ public partial class MainMenu : ContentPage
         await Navigation.PushAsync(new ClientsPage());
     }
 
-    private void OnDutiesButtonClicked(object sender, EventArgs e)
+    private async void OnDutiesButtonClicked(object sender, EventArgs e)
     {
-        // Handle Duties button click
+        await Navigation.PushAsync(new DutiesPage());
     }
 
     private void OnReportsButtonClicked(object sender, EventArgs e)
@@ -33,5 +35,11 @@ public partial class MainMenu : ContentPage
     private void OnSettingsButtonClicked(object sender, EventArgs e)
     {
         // Handle Settings button click
+    }
+    
+    private void OnCreateSecuredObjectButtonClicked(object sender, EventArgs e)
+    {
+        SecuredObjectController securedObjectController = new();
+        securedObjectController.Setup();
     }
 }

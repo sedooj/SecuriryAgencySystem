@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Core.Impl;
 using Core.Interface;
 using Core.Model;
@@ -8,21 +9,26 @@ namespace Core.Service.Impl;
 
 public class DutyScheduleService : IDutyScheduleService
 {
-    private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
-
-
-    public void CreateDutySchedule(Guid guardId, DutySchedule schedule)
+    private readonly IDbService<Employee> _employeeDbService = new EmployeesDbService();
+    private readonly IDbService<SecuredObject> _securedObjectDbService = new JsonDbService<SecuredObject>();
+    
+    public EmployeeDutySchedule CreateDutySchedule(Guid guardId, DutySchedule schedule, Guid securingObjectId)
     {
-        var guardian = _employeeDbService.LoadEntity(guardId) ?? throw new ArgumentException("Employee not found");
+        var guardian = _employeeDbService.LoadEntity(guardId) ?? throw new ArgumentException($"Employee with ID {guardId} not found");
+        var securedObject = _securedObjectDbService.LoadEntity(securingObjectId) ?? throw new ArgumentException("Secured object not found");
         guardian.Schedule = schedule;
+        guardian.SecuringObjectId = securedObject.Id;
+        guardian.SecuringObjectName = securedObject.Name;
         _employeeDbService.UpdateEntity(guardId, guardian);
+        return new EmployeeDutySchedule(guardian, guardian.Schedule, securingObjectId);
     }
 
-    public void UpdateDutySchedule(Guid guardId, DutySchedule schedule)
+    public EmployeeDutySchedule UpdateDutySchedule(Guid guardId, DutySchedule schedule, Guid securingObjectId)
     {
         var guardian = _employeeDbService.LoadEntity(guardId) ?? throw new ArgumentException("Employee not found");
         guardian.Schedule = schedule;
         _employeeDbService.UpdateEntity(guardId, guardian);
+        return new EmployeeDutySchedule(guardian, guardian.Schedule, securingObjectId);
     }
 
     public void DeleteDutySchedule(Guid guardId)
@@ -47,5 +53,25 @@ public class DutyScheduleService : IDutyScheduleService
         
         guardian.Schedule = null;
         _employeeDbService.UpdateEntity(guardId, guardian);
+    }
+
+    public EmployeeDutySchedule LoadDutyScheduleById(Guid guardId)
+    {
+        var guardian = _employeeDbService.LoadEntity(guardId) ?? throw new ArgumentException("Employee not found");
+        return new EmployeeDutySchedule(guardian, guardian.Schedule!, guardian.SecuringObjectId ?? throw new ArgumentException("Employee does not have a schedule"));
+    }
+
+    public List<EmployeeDutySchedule> LoadAllDutySchedules()
+    {
+        var employees = _employeeDbService.LoadEntities();
+        List<EmployeeDutySchedule> schedules = [];
+        foreach (var employee in employees)
+        {
+            if (employee.Schedule != null)
+            {
+                schedules.Add(new EmployeeDutySchedule(employee, employee.Schedule, employee.SecuringObjectId ?? throw new ArgumentException("Employee does not have a schedule")));
+            }
+        }
+        return schedules;
     }
 }

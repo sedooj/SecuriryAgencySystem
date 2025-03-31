@@ -1,54 +1,38 @@
 namespace Core.Model.Users;
 
-public class Employee(
-    Passport passport,
-    JobRole jobRole,
-    Documents documents,
-    List<Guid>? specialEquipments = null,
-    List<Guid>? weapons = null,
-    DutySchedule? schedule = null,
-    Guid? securingObjectId = null)
-    : Person(passport)
+public class Employee : Person
 {
-    public Guid LicenseId { get; } = Guid.NewGuid();
-    public Guid EmployeeId { get; } = Guid.NewGuid();
-    public JobRole JobRole { get; set; } = jobRole;
-    public Documents Documents { get; set; } = documents;
-    public List<Guid>? SpecialEquipments { get; set; } = specialEquipments;
-    public List<Guid>? Weapons { get; set; } = weapons;
-    public DutySchedule? Schedule { get; set; } = schedule;
-    public Guid? SecuringObjectId { get; set; } = securingObjectId;
-}
-
-public class JobRole
-{
-    public JobRole(string position, Role role)
+    public Employee(
+        Passport passport,
+        Guid id,
+        Guid licenseId,
+        Guid employeeId,
+        JobRole jobRole,
+        Documents documents,
+        List<Guid>? specialEquipments,
+        List<Guid>? weapons,
+        DutySchedule? schedule,
+        Guid? securingObjectId,
+        string? securingObjectName) : base(passport, id)
     {
-        Position = position;
-        Role = role;
+        LicenseId = licenseId;
+        EmployeeId = employeeId;
+        JobRole = jobRole;
+        Documents = documents;
+        SpecialEquipments = specialEquipments;
+        Weapons = weapons;
+        Schedule = schedule;
+        SecuringObjectId = securingObjectId;
+        SecuringObjectName = securingObjectName;
     }
 
-    public string Position { get; set; }
-    public Role Role { get; set; }
-    public decimal Salary => GetSalaryByRole(Role);
-
-    private decimal GetSalaryByRole(Role employeeRole)
-    {
-        return employeeRole switch
-        {
-            Role.SecurityOfficer => 50000,
-            Role.Cleaner => 32000,
-            Role.Manager => 70000,
-            Role.Director => 90000,
-            _ => 0
-        };
-    }
-}
-
-public enum Role
-{
-    SecurityOfficer,
-    Cleaner,
-    Manager,
-    Director
+    public Guid LicenseId { get; set; }
+    public Guid EmployeeId { get; set; }
+    public JobRole JobRole { get; set; }
+    public Documents Documents { get; set; }
+    public List<Guid>? SpecialEquipments { get; set; }
+    public List<Guid>? Weapons { get; set; }
+    public DutySchedule? Schedule { get; set; }
+    public Guid? SecuringObjectId { get; set; }
+    public string? SecuringObjectName { get; set; }
 }

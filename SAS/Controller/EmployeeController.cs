@@ -16,7 +16,7 @@ public class EmployeeController : ITableController
         UpdateTable();
     }
 
-    private ObservableCollection<Employee> GetEmployees()
+    public ObservableCollection<Employee> GetEmployees()
     {
         return new ObservableCollection<Employee>(_employeeDbService.LoadEntities());
     }
