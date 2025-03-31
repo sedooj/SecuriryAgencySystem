@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SAS.Pages.Employees.AddEmployeePage"
+             Title="Добавить сотрудника">
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <Entry x:Name="FirstNameEntry" Placeholder="Имя"/>
+            <Entry x:Name="LastNameEntry" Placeholder="Фамилия"/>
+            <Entry x:Name="MiddleNameEntry" Placeholder="Отчество"/>
+            <Entry x:Name="PositionEntry" Placeholder="Должность"/>
+            <Label Text="Выберите роль"/>
+            <Picker x:Name="RolePicker"/>
+            <Entry x:Name="AddressEntry" Placeholder="Адрес"/>
+            <Entry x:Name="PassportNumberEntry" Placeholder="Номер паспорта"/>
+            <Entry x:Name="PassportSeriesEntry" Placeholder="Серия паспорта"/>
+            <Label Text="Дата выдачи паспорта"/>
+            <DatePicker x:Name="PassportIssueDatePicker"/>
+            <Entry x:Name="GenderEntry" Placeholder="Пол"/>
+            <Entry x:Name="CountryEntry" Placeholder="Страна"/>
+            <Entry x:Name="InnEntry" Placeholder="ИНН"/>
+            <Button Text="Сохранить" Clicked="OnSaveButtonClicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -11,17 +11,17 @@ public class ContractService : IContractService
     private readonly IDbService<Contract> _contractDbService = new JsonDbService<Contract>();
     private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
-    private readonly IDbService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
-
+    private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
+    
     private readonly IPaymentService _paymentService = new PaymentService();
     
     public void CreateContract(Contract contract)
     {
-        foreach (var guardId in contract.GuardsIds)
+        foreach (var employeeId in contract.EmployeesId)
         {
-            var guardian = _guardianDbService.LoadEntity(guardId) ?? throw new NullReferenceException($"No guardian found with id {guardId}");
+            var guardian = _employeeDbService.LoadEntity(employeeId) ?? throw new NullReferenceException($"No guardian found with id {employeeId}");
             guardian.SecuringObjectId = contract.ObjectToSecureId;
-            _guardianDbService.UpdateEntity(guardId, guardian);
+            _employeeDbService.UpdateEntity(employeeId, guardian);
         }
         _contractDbService.SaveEntity(contract);
     }

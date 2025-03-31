@@ -1,8 +1,7 @@
-using Core.Model;
-using SAS.Controller;
 using Core.Model.Users;
+using SAS.Controller;
 
-namespace SAS.Pages
+namespace SAS.Pages.Employees
 {
     public partial class EmployeesPage : ContentPage, IPage
     {
@@ -25,13 +24,16 @@ namespace SAS.Pages
             EmployeesList.ItemsSource = _controller.Employees;
         }
 
-        private void OnAddEmployeeClicked(object sender, EventArgs e)
+        private async void OnAddEmployeeClicked(object sender, EventArgs e)
         {
-            var newEmployee = new Employee(new Passport("125", "225", DateTime.Now, "Сергендер", "Сергей", "Сергеевич", "Male", "Россия"),
-                                           new JobRole("Менеджер", Role.Manager), new Documents("Улица Чехова", "230"));
-            _controller.AddEmployee(newEmployee);
+            var addEmployeePage = new AddEmployeePage();
+            addEmployeePage.EmployeeAdded += (s, newEmployee) =>
+            {
+                _controller.AddEmployee(newEmployee);
+            };
+            await Navigation.PushAsync(addEmployeePage);
         }
-        
+
         private void OnEditEmployeeClicked(object sender, EventArgs e)
         {
             if (EmployeesList.SelectedItem is not Employee selectedEmployee) return;
@@ -51,10 +53,10 @@ namespace SAS.Pages
             _controller.RemoveEmployee(selectedEmployee);
         }
 
-        private void OnViewButtonClicked(object sender, EventArgs e)
+        private async void OnViewButtonClicked(object sender, EventArgs e)
         {
             if ((sender as ImageButton)?.BindingContext is not Employee selectedEmployee) return;
-            DisplayAlert("Просмотр сотрудника", $"ФИО: {selectedEmployee.Passport.Name}\nДолжность: {selectedEmployee.JobRole.Position}", "OK");
+            await Navigation.PushModalAsync(new ViewEmployeePage(selectedEmployee));
         }
     }
 }

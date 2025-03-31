@@ -8,4 +8,6 @@ public interface IClientService
     void CreateClient(IndividualClient individualClient);
     void UpdateClient(CorporateClient corporateClient);
     void UpdateClient(IndividualClient individualClient);
+    List<IndividualClient> LoadIndividualClients();
+    List<CorporateClient> LoadCorporateClients();
 }

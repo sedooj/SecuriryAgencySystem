@@ -1,21 +1,23 @@
 namespace Core.Model.Users;
 
-public class Employee : Person
+public class Employee(
+    Passport passport,
+    JobRole jobRole,
+    Documents documents,
+    List<Guid>? specialEquipments = null,
+    List<Guid>? weapons = null,
+    DutySchedule? schedule = null,
+    Guid? securingObjectId = null)
+    : Person(passport)
 {
-    public Employee(
-        Passport passport,
-        JobRole jobRole,
-        Documents documents) : base(passport)
-    {
-        JobRole = jobRole;
-        Documents = documents;
-    }
-
     public Guid LicenseId { get; } = Guid.NewGuid();
     public Guid EmployeeId { get; } = Guid.NewGuid();
-    public JobRole JobRole { get; set; }
-    public Documents Documents { get; set; }
-    
+    public JobRole JobRole { get; set; } = jobRole;
+    public Documents Documents { get; set; } = documents;
+    public List<Guid>? SpecialEquipments { get; set; } = specialEquipments;
+    public List<Guid>? Weapons { get; set; } = weapons;
+    public DutySchedule? Schedule { get; set; } = schedule;
+    public Guid? SecuringObjectId { get; set; } = securingObjectId;
 }
 
 public class JobRole

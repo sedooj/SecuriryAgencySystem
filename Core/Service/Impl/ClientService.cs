@@ -29,4 +29,14 @@ public class ClientService : IClientService
     {
         _individualClientDbService.UpdateEntity(individualClient.Id, individualClient);
     }
+
+    public List<IndividualClient> LoadIndividualClients()
+    {
+        return _individualClientDbService.LoadEntities();
+    }
+
+    public List<CorporateClient> LoadCorporateClients()
+    {
+        return _corporateClientDbService.LoadEntities();
+    }
 }

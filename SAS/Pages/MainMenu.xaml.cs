@@ -1,3 +1,6 @@
+using SAS.Pages.Clients;
+using SAS.Pages.Employees;
+
 namespace SAS.Pages;
 
 public partial class MainMenu : ContentPage
@@ -12,9 +15,9 @@ public partial class MainMenu : ContentPage
         await Navigation.PushAsync(new EmployeesPage());
     }
 
-    private void OnClientsButtonClicked(object sender, EventArgs e)
+    private async void OnClientsButtonClicked(object sender, EventArgs e)
     {
-        // Handle Clients button click
+        await Navigation.PushAsync(new ClientsPage());
     }
 
     private void OnDutiesButtonClicked(object sender, EventArgs e)
