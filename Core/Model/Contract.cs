@@ -1,8 +1,8 @@
 namespace Core.Model;
 
-public class Contract(List<Guid> employeesId, Guid objectToSecureId, Schedule contractTime, Guid? payment, Guid clientId)
+public class Contract(Guid id, List<Guid> employeesId, Guid objectToSecureId, Schedule contractTime, Guid? payment, Guid clientId)
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    public Guid Id { get; set; } = id;
     public Guid ObjectToSecureId { get; set; } = objectToSecureId;
     public List<Guid> EmployeesId { get; set; } = employeesId;
     public Schedule ContractTime { get; set; } = contractTime;

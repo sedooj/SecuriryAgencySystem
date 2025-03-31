@@ -2,10 +2,9 @@ namespace Core.Model;
 
 public class SecuredObject
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Address { get; set; }
-    public string ObjectType { get; set; }
     public double Area { get; set; }
     public SecurityLevel SecurityLevel { get; set; }
     public int GuardiansCount { get; set; }
@@ -22,11 +21,11 @@ public class SecuredObject
         };
     }
 
-    public SecuredObject(string name, string address, string objectType, double area, SecurityLevel securityLevel)
+    public SecuredObject(Guid id, string name, string address, double area, SecurityLevel securityLevel)
     {
+        Id = id;
         Name = name;
         Address = address;
-        ObjectType = objectType;
         Area = area;
         SecurityLevel = securityLevel;
         GuardiansCount = CalculateGuardiansCount();

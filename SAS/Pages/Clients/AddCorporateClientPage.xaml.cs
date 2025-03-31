@@ -14,6 +14,7 @@ public partial class AddCorporateClientPage : ContentPage
     private void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var newClient = new CorporateClient(
+            Guid.NewGuid(),
             CompanyNameEntry.Text,
             Guid.Parse(ContractIdEntry.Text)
         );

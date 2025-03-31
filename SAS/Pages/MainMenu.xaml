@@ -29,7 +29,10 @@
                 </StackLayout>
             </StackLayout>
 
-            <ImageButton Grid.Row="1" Source="settings.png" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnSettingsButtonClicked"/>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalOptions="End">
+                <ImageButton Source="secured_object.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnCreateSecuredObjectButtonClicked"/>
+                <ImageButton Source="settings.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnSettingsButtonClicked"/>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

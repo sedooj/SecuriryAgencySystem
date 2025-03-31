@@ -2,7 +2,7 @@ namespace Core.Model;
 
 public class Event
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public DateTime Date { get; set; }
     public string Location { get; set; }
@@ -11,8 +11,9 @@ public class Event
     public EventType EventType { get; set; }
     public int GuardiansCount { get; set; }
 
-    public Event(string name, string location, int participantsCount, EventType eventType, Schedule duration)
+    public Event(Guid id, string name, string location, int participantsCount, EventType eventType, Schedule duration)
     {
+        Id = id;
         Name = name;
         Date = duration.StartDate;
         Location = location;

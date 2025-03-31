@@ -11,6 +11,8 @@ public class Schedule(DateTime startDate, DateTime endDate)
 {
     public DateTime StartDate { get; set; } = startDate;
     public DateTime EndDate { get; set; } = endDate;
+    public string WorkingDate => $"{StartDate.ToShortDateString()} - {EndDate.ToShortDateString()}";
+    public string WorkingTime => $"{StartDate.ToShortTimeString()} - {EndDate.ToShortTimeString()}";
 }
 
 public class Replacement(Guid? replacesEmployeeId, string? replacementReason)

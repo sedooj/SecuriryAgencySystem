@@ -13,7 +13,7 @@ public class PaymentService : IPaymentService
     public void ProcessPayment(Guid contractId, Guid payerId, decimal amount)
     {
         if (!ValidatePayment(amount)) throw new ArgumentException("Payment amount is invalid");
-        var payment = new Payment(payerId, DateTime.Now, amount);
+        var payment = new Payment(Guid.NewGuid(), payerId, DateTime.Now, amount);
         _paymentDbService.SaveEntity(payment);
         var contract = _contractDbService.LoadEntity(contractId) ??
                        throw new ArgumentNullException($"Contract with id {contractId} not found");

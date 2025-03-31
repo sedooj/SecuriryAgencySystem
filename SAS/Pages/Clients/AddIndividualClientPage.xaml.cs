@@ -15,6 +15,7 @@ public partial class AddIndividualClientPage : ContentPage
     private void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var newClient = new IndividualClient(
+            Guid.NewGuid(),
             new Passport(
                 PassportSeriesEntry.Text,
                 PassportNumberEntry.Text,
@@ -24,7 +25,8 @@ public partial class AddIndividualClientPage : ContentPage
                 MiddleNameEntry.Text,
                 GenderEntry.Text,
                 CountryEntry.Text
-            )
+            ),
+            Guid.NewGuid()
         );
 
         ClientAdded?.Invoke(this, newClient);
