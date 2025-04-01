@@ -65,7 +65,7 @@ public partial class ReportsPage : ContentPage
                 if (client != null)
                 {
                     var report = _reportService.GenerateClientInvoice(client.Id);
-                    await DisplayAlert("Счет клиенту",
+                    await DisplayAlert($"Счет для клиента {client.Name}",
                         $"Всего вы заплатили: {report.TotalPayed} (Кол-во счетов: {report.InvoicesCount})\nНеоплаченных счетов: {report.NotPaidInvoicesCount}\n",
                         "OK");
                 }
