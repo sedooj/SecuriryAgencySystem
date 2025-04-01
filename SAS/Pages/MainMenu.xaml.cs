@@ -1,3 +1,4 @@
+using Core.Service.Impl;
 using SAS.Controller;
 using SAS.Pages.Clients;
 using SAS.Pages.Duties;
@@ -7,6 +8,8 @@ namespace SAS.Pages;
 
 public partial class MainMenu : ContentPage
 {
+    private readonly BaseDataLoader _baseDataLoader = new();
+    
     public MainMenu()
     {
         InitializeComponent();
@@ -36,10 +39,11 @@ public partial class MainMenu : ContentPage
     {
         // Handle Settings button click
     }
-    
-    private void OnCreateSecuredObjectButtonClicked(object sender, EventArgs e)
+
+    private void OnLoadBaseDataClicked(object sender, EventArgs e)
     {
-        SecuredObjectController securedObjectController = new();
-        securedObjectController.Setup();
+        _baseDataLoader.ProcessLoadBaseData();
+        LoadBaseDateButton.IsEnabled = _baseDataLoader.IsNeedToLoadBaseData;
     }
+    
 }

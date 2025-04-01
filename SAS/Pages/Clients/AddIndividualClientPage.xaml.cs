@@ -26,7 +26,7 @@ public partial class AddIndividualClientPage : ContentPage
                 GenderEntry.Text,
                 CountryEntry.Text
             ),
-            Guid.NewGuid()
+            null
         );
 
         ClientAdded?.Invoke(this, newClient);

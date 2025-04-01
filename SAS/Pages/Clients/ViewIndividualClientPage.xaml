@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SAS.Pages.Clients.ViewIndividualClientPage"
-             Title="Просмотр клиента">
+             Title="Просмотр частного лица">
     <ContentPage.Content>
         <StackLayout Padding="10" Spacing="10">
             <Label x:Name="FullNameLabel"/>
@@ -12,6 +12,7 @@
             <Label x:Name="GenderLabel"/>
             <Label x:Name="CountryLabel"/>
             <Label x:Name="ContractIdLabel"/>
+            <Button x:Name="CreateContractButton" Text="Заключить договор" Clicked="OnCreateContractButtonClicked"/>
             <Button Text="Закрыть" Clicked="OnCloseButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>

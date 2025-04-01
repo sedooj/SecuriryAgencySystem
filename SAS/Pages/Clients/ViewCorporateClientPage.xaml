@@ -7,6 +7,7 @@
         <StackLayout Padding="10" Spacing="10">
             <Label x:Name="CompanyNameLabel"/>
             <Label x:Name="ContractIdLabel"/>
+            <Button x:Name="CreateContractButton" Text="Заключить договор" Clicked="OnCreateContractButtonClicked"/>
             <Button Text="Закрыть" Clicked="OnCloseButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>

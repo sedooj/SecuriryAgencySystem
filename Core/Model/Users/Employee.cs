@@ -6,7 +6,6 @@ public class Employee : Person
         Passport passport,
         Guid id,
         Guid licenseId,
-        Guid employeeId,
         JobRole jobRole,
         Documents documents,
         List<Guid>? specialEquipments,
@@ -16,7 +15,6 @@ public class Employee : Person
         string? securingObjectName) : base(passport, id)
     {
         LicenseId = licenseId;
-        EmployeeId = employeeId;
         JobRole = jobRole;
         Documents = documents;
         SpecialEquipments = specialEquipments;
@@ -27,7 +25,6 @@ public class Employee : Person
     }
 
     public Guid LicenseId { get; set; }
-    public Guid EmployeeId { get; set; }
     public JobRole JobRole { get; set; }
     public Documents Documents { get; set; }
     public List<Guid>? SpecialEquipments { get; set; }

@@ -25,7 +25,7 @@ namespace SAS.Pages.Duties
             var addDutyPage = new AddDutyPage(_dutiesController);
             addDutyPage.DutyAdded += (s, duty) =>
             {
-                _dutiesController.AddDuty(duty.Employee.EmployeeId, duty.Duty, duty.SecuringObjectId);
+                _dutiesController.AddDuty(duty.Employee.Id, duty.Duty, duty.SecuringObjectId);
             };
             await Navigation.PushAsync(addDutyPage);
         }

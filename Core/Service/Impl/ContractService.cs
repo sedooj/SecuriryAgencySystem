@@ -12,7 +12,6 @@ public class ContractService : IContractService
     private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
     private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
-    
     private readonly IPaymentService _paymentService = new PaymentService();
     
     public void CreateContract(Contract contract)
@@ -55,5 +54,28 @@ public class ContractService : IContractService
     public void PayContract(Guid contractId, Guid payerId, decimal amount)
     {
         _paymentService.ProcessPayment(contractId, payerId, amount);
+    }
+
+    public decimal CalculateContractAmount(SecuredObject securedObject)
+    {
+        decimal baseRate = 800m;
+        decimal securityLevelMultiplier = securedObject.SecurityLevel switch
+        {
+            SecurityLevel.Low => 1.0m,
+            SecurityLevel.Medium => 1.5m,
+            SecurityLevel.High => 2.0m,
+            SecurityLevel.Hard => 2.5m,
+            _ => 1.0m
+        };
+        decimal guardiansCost = securedObject.GuardiansCount * 9500m;
+        decimal contractAmount = ((decimal) securedObject.Area * baseRate * securityLevelMultiplier) + guardiansCost;
+        return contractAmount;
+    }
+
+    public void ProcessCreateContract(Contract contract, Type clientType)
+    {
+        CreateContract(contract);
+        LinkContractToClient(contract.Id, contract.ClientId, clientType);
+        PayContract(contract.Id, contract.ClientId, contract.ContractSum);
     }
 }

@@ -38,6 +38,11 @@ public class CorporateClientController
 
     public void UpdateTable()
     {
-        CorporateClients = GetCorporateClients();
+        var clients = GetCorporateClients();
+        CorporateClients.Clear();
+        foreach (var client in clients)
+        {
+            CorporateClients.Add(client);
+        }
     }
 }

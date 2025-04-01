@@ -11,15 +11,15 @@ public partial class AddCorporateClientPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnSaveButtonClicked(object sender, EventArgs e)
+    private async void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var newClient = new CorporateClient(
             Guid.NewGuid(),
             CompanyNameEntry.Text,
-            Guid.NewGuid()
+            null
         );
 
         ClientAdded?.Invoke(this, newClient);
-        Navigation.PopAsync();
+        await Navigation.PopAsync();
     }
 }
