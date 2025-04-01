@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 using Core.Exception;
 using Core.Interface;
 
@@ -6,17 +7,19 @@ namespace Core.Impl;
 
 public class JsonDbService<T> : IDbService<T> where T : class
 {
-    private readonly JsonObjectSerializer _serializer = new();
     private readonly string _dbDir = new PathBuilder().GetTablePath(typeof(T));
+    private readonly JsonObjectSerializer _serializer = new();
 
     public JsonDbService()
     {
+        CreateDirectoryIfNeed();
+    }
+    
+    private void CreateDirectoryIfNeed()
+    {
         var directory = Path.GetDirectoryName(_dbDir);
         if (directory == null) throw new UnsupportedDirectory();
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
+        if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
     }
 
     public List<T> LoadEntities()
@@ -62,13 +65,9 @@ public class JsonDbService<T> : IDbService<T> where T : class
             var entities = LoadEntities();
             var index = entities.FindIndex(e => GetEntityId(e) == id);
             if (index != -1)
-            {
                 entities[index] = updatedEntity;
-            }
             else
-            {
                 entities.Add(updatedEntity);
-            }
             SaveEntitiesToFile(entities);
         }
         catch (System.Exception ex)
@@ -99,10 +98,31 @@ public class JsonDbService<T> : IDbService<T> where T : class
         }
     }
 
+    public void DeleteAll()
+    {
+        try
+        {
+            if (File.Exists(_dbDir))
+            {
+                File.Delete(_dbDir);
+                Debug.WriteLine($"All entities deleted successfully from {_dbDir}.");
+            }
+            else
+            {
+                Debug.WriteLine($"No file found at {_dbDir} to delete.");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.WriteLine($"Error deleting all entities: {ex.Message}");
+        }
+    }
+
     private void SaveEntitiesToFile(List<T> entities)
     {
         try
         {
+            CreateDirectoryIfNeed();
             var jsonString = _serializer.Serialize(entities);
             File.WriteAllText(_dbDir, jsonString);
             Debug.WriteLine($"Entities saved successfully to {_dbDir}.");
@@ -117,9 +137,7 @@ public class JsonDbService<T> : IDbService<T> where T : class
     {
         var property = typeof(T).GetProperty("Id");
         if (property != null && property.PropertyType == typeof(Guid))
-        {
             return (Guid)(property.GetValue(entity) ?? Guid.Empty);
-        }
         throw new InvalidOperationException("Entity does not have a Guid Id property.");
     }
 }

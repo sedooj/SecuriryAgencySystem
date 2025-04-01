@@ -7,13 +7,14 @@ namespace SAS.Pages.Clients;
 public partial class ViewCorporateClientPage : ContentPage
 {
     private readonly IContractService _contractService = new ContractService();
-    public event EventHandler<CorporateClient>? ContractConcluded; 
 
     public ViewCorporateClientPage(CorporateClient client)
     {
         InitializeComponent();
         BindClientData(client);
     }
+
+    public event EventHandler<CorporateClient>? ContractConcluded;
 
     private void BindClientData(CorporateClient client)
     {
@@ -26,19 +27,41 @@ public partial class ViewCorporateClientPage : ContentPage
     {
         Navigation.PopAsync();
     }
-    
+
     private async void OnCreateContractButtonClicked(object sender, EventArgs e)
     {
-        if (sender is Button { BindingContext: CorporateClient corporateClient})
+        try
         {
-            var createContractPage = new CreateContractPage(corporateClient);
-            createContractPage.ContractConcluded += (s, contract) =>
+            if (sender is Button { BindingContext: CorporateClient corporateClient })
             {
-                _contractService.ProcessCreateContract(contract, corporateClient.GetType());
-                ContractConcluded?.Invoke(this, corporateClient);
-                ContractIdLabel.Text = "Контракт: " + contract.Id;
-            };
-            await Navigation.PushAsync(createContractPage);
+                var createContractPage = new CreateContractPage(corporateClient);
+                createContractPage.ContractConcluded += (s, contract) =>
+                {
+                    try
+                    {
+                        _contractService.ProcessCreateContract(contract, corporateClient.GetType());
+                        ContractConcluded?.Invoke(this, corporateClient);
+                        ContractIdLabel.Text = "Контракт: " + contract.Id;
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                        DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
+                    }
+                };
+                await Navigation.PushAsync(createContractPage);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
+        }
+        catch (ArgumentNullException ex)
+        {
+            await DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
         }
     }
 }

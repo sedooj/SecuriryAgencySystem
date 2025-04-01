@@ -9,7 +9,7 @@ public class ClientService : IClientService
 {
     private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
     private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
-    
+
     public void CreateClient(CorporateClient corporateClient)
     {
         _corporateClientDbService.SaveEntity(corporateClient);

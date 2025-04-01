@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Core.Impl;
 using Core.Interface;
 using Core.Model;
@@ -10,11 +9,11 @@ namespace Core.Service.Impl;
 public class ContractService : IContractService
 {
     private readonly IDbService<Contract> _contractDbService = new JsonDbService<Contract>();
-    private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
     private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
-    private readonly IDbService<SecuredObject> _securedObjectDbService = new JsonDbService<SecuredObject>();
+    private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     private readonly IPaymentService _paymentService = new PaymentService();
+    private readonly IDbService<SecuredObject> _securedObjectDbService = new JsonDbService<SecuredObject>();
 
     public Contract CreateContract(Contract contract)
     {
@@ -66,8 +65,8 @@ public class ContractService : IContractService
 
     public decimal CalculateContractAmount(SecuredObject securedObject)
     {
-        decimal baseRate = 800m;
-        decimal securityLevelMultiplier = securedObject.SecurityLevel switch
+        var baseRate = 800m;
+        var securityLevelMultiplier = securedObject.SecurityLevel switch
         {
             SecurityLevel.Low => 1.0m,
             SecurityLevel.Medium => 1.5m,
@@ -75,8 +74,8 @@ public class ContractService : IContractService
             SecurityLevel.Hard => 2.5m,
             _ => 1.0m
         };
-        decimal guardiansCost = securedObject.GuardiansCount * 9500m;
-        decimal contractAmount = ((decimal)securedObject.Area * baseRate * securityLevelMultiplier) + guardiansCost;
+        var guardiansCost = securedObject.GuardiansCount * 9500m;
+        var contractAmount = (decimal)securedObject.Area * baseRate * securityLevelMultiplier + guardiansCost;
         return contractAmount;
     }
 
@@ -91,7 +90,8 @@ public class ContractService : IContractService
     public Contract AssignStaffToContract(Contract contract, List<Guid> securities)
     {
         var securedObject = _securedObjectDbService.LoadEntity(contract.ObjectToSecureId) ??
-                            throw new NullReferenceException($"Secured object with id {contract.ObjectToSecureId} not found");
+                            throw new NullReferenceException(
+                                $"Secured object with id {contract.ObjectToSecureId} not found");
         foreach (var security in securities)
         {
             var employee = _employeeDbService.LoadEntity(security) ??
@@ -124,9 +124,7 @@ public class ContractService : IContractService
                             throw new NullReferenceException("Secured object not found");
 
         if (availableGuardians.Count < securedObject.GuardiansCount)
-        {
             throw new InvalidOperationException("Not enough available guardians for the contract.");
-        }
 
         return availableGuardians.Take(securedObject.GuardiansCount).Select(e => e.Id).ToList();
     }

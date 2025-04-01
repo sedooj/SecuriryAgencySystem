@@ -1,21 +1,20 @@
-using System.ComponentModel;
 using Core.Model.Users;
 using Core.Service.Impl;
 using Core.Service.Interface;
-using SAS.Controller;
 
 namespace SAS.Pages.Clients;
 
 public partial class ViewIndividualClientPage : ContentPage
 {
     private readonly IContractService _contractService = new ContractService();
-    public event EventHandler<IndividualClient>? ContractConcluded;
 
     public ViewIndividualClientPage(IndividualClient client)
     {
         InitializeComponent();
         BindClientData(client);
     }
+
+    public event EventHandler<IndividualClient>? ContractConcluded;
 
     private void BindClientData(IndividualClient client)
     {
@@ -29,24 +28,45 @@ public partial class ViewIndividualClientPage : ContentPage
         CreateContractButton.BindingContext = client;
     }
 
-    private void OnCloseButtonClicked(object sender, EventArgs e)
+    private async void OnCloseButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PopAsync();
+        await Navigation.PopAsync();
     }
 
     private async void OnCreateContractButtonClicked(object sender, EventArgs e)
     {
-        if (sender is Button { BindingContext: IndividualClient individualClient })
+        try
         {
-            var createContractPage = new CreateContractPage(individualClient);
-            createContractPage.ContractConcluded += (s, contract) =>
+            if (sender is Button { BindingContext: IndividualClient individualClient })
             {
-                _contractService.ProcessCreateContract(contract, individualClient.GetType());
-                ContractConcluded?.Invoke(this, individualClient);
-                ContractIdLabel.Text = "Контракт: " + contract.Id;
-            };
-            await Navigation.PushAsync(createContractPage);
+                var createContractPage = new CreateContractPage(individualClient);
+                createContractPage.ContractConcluded += (s, contract) =>
+                {
+                    try
+                    {
+                        _contractService.ProcessCreateContract(contract, individualClient.GetType());
+                        ContractConcluded?.Invoke(this, individualClient);
+                        ContractIdLabel.Text = "Контракт: " + contract.Id;
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                        DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
+                    }
+                };
+                await Navigation.PushAsync(createContractPage);
+            }
         }
-        
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
+        }
+        catch (ArgumentNullException ex)
+        {
+            await DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
+        }
     }
 }

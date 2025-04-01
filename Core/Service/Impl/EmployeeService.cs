@@ -25,13 +25,9 @@ public class EmployeeService : IEmployeeService
     public void AssignWeapon(Employee employee, Guid weaponId)
     {
         if (employee.Weapons == null)
-        {
             employee.Weapons = new List<Guid>();
-        }
         else
-        {
             employee.Weapons.Add(weaponId);
-        }
         _employeeDbService.UpdateEntity(employee.Id, employee);
     }
 

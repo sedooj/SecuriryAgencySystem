@@ -7,4 +7,5 @@ public interface IDbService<T> where T : class
     void SaveEntity(T entity);
     void UpdateEntity(Guid id, T updatedEntity);
     void DeleteEntity(Guid id);
+    void DeleteAll();
 }

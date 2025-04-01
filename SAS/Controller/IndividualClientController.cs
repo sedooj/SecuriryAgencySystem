@@ -7,11 +7,19 @@ namespace SAS.Controller;
 public class IndividualClientController : ITableController
 {
     private readonly ClientService _clientService = new();
-    public ObservableCollection<IndividualClient> IndividualClients { get; private set; } = new();
 
     public IndividualClientController()
     {
         UpdateTable();
+    }
+
+    public ObservableCollection<IndividualClient> IndividualClients { get; } = new();
+
+    public void UpdateTable()
+    {
+        var clients = GetIndividualClients();
+        IndividualClients.Clear();
+        foreach (var client in clients) IndividualClients.Add(client);
     }
 
     public void AddClient(IndividualClient client)
@@ -30,19 +38,9 @@ public class IndividualClientController : ITableController
         _clientService.UpdateClient(client);
         IndividualClients.Remove(client);
     }
-    
+
     private ObservableCollection<IndividualClient> GetIndividualClients()
     {
         return new ObservableCollection<IndividualClient>(_clientService.LoadIndividualClients());
-    }
-
-    public void UpdateTable()
-    {
-        var clients = GetIndividualClients();
-        IndividualClients.Clear();
-        foreach (var client in clients)
-        {
-            IndividualClients.Add(client);
-        }
     }
 }

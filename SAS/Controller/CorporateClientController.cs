@@ -7,12 +7,13 @@ namespace SAS.Controller;
 public class CorporateClientController
 {
     private readonly ClientService _clientService = new();
-    public ObservableCollection<CorporateClient> CorporateClients { get; private set; } = new();
 
     public CorporateClientController()
     {
         UpdateTable();
     }
+
+    public ObservableCollection<CorporateClient> CorporateClients { get; } = new();
 
     public void AddClient(CorporateClient client)
     {
@@ -40,9 +41,6 @@ public class CorporateClientController
     {
         var clients = GetCorporateClients();
         CorporateClients.Clear();
-        foreach (var client in clients)
-        {
-            CorporateClients.Add(client);
-        }
+        foreach (var client in clients) CorporateClients.Add(client);
     }
 }

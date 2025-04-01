@@ -2,8 +2,13 @@ using System.Text.Json;
 
 namespace Core;
 
-public class JsonObjectSerializer 
+public class JsonObjectSerializer
 {
+    private static readonly JsonSerializerOptions Options = new()
+    {
+        IncludeFields = true
+    };
+
     public T? Deserialize<T>(string data)
     {
         return JsonSerializer.Deserialize<T>(data, Options);
@@ -13,9 +18,4 @@ public class JsonObjectSerializer
     {
         return JsonSerializer.Serialize(obj, Options);
     }
-
-    private static readonly JsonSerializerOptions Options = new()
-    {
-        IncludeFields = true,
-    };
 }

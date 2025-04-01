@@ -1,9 +1,38 @@
 namespace Core.Model;
 
-public class JobRole(string position, Role role)
+public class JobRole
 {
-    public string Position { get; set; } = position;
-    public Role Role { get; set; } = role;
+    private string _position;
+    private Role _role;
+
+    public JobRole(string position, Role role)
+    {
+        Position = position;
+        Role = role;
+    }
+
+    public string Position
+    {
+        get => _position;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 100)
+                throw new ArgumentException("Название должности должно быть длиной от 1 до 100 символов.");
+            _position = value;
+        }
+    }
+
+    public Role Role
+    {
+        get => _role;
+        set
+        {
+            if (!Enum.IsDefined(typeof(Role), value))
+                throw new ArgumentException("Недопустимая роль.");
+            _role = value;
+        }
+    }
+
     public decimal Salary => GetSalaryByRole(Role);
 
     private decimal GetSalaryByRole(Role employeeRole)

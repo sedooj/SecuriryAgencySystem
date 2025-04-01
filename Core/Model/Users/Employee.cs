@@ -2,6 +2,11 @@ namespace Core.Model.Users;
 
 public class Employee : Person
 {
+    private Documents _documents;
+    private JobRole _jobRole;
+    private Guid _licenseId;
+    private Guid? _securingObjectId;
+
     public Employee(
         Passport passport,
         Guid id,
@@ -24,12 +29,55 @@ public class Employee : Person
         SecuringObjectName = securingObjectName;
     }
 
-    public Guid LicenseId { get; set; }
-    public JobRole JobRole { get; set; }
-    public Documents Documents { get; set; }
+    public Guid LicenseId
+    {
+        get => _licenseId;
+        set
+        {
+            if (value == Guid.Empty)
+                throw new ArgumentException("LicenseId не может быть пустым.");
+            _licenseId = value;
+        }
+    }
+
+    public JobRole JobRole
+    {
+        get => _jobRole;
+        set
+        {
+            if (value == null)
+                throw new ArgumentException("JobRole не может быть null.");
+            _jobRole = value;
+        }
+    }
+
+    public Documents Documents
+    {
+        get => _documents;
+        set
+        {
+            if (value == null)
+                throw new ArgumentException("Documents не может быть null.");
+            _documents = value;
+        }
+    }
+
     public List<Guid>? SpecialEquipments { get; set; }
+
     public List<Guid>? Weapons { get; set; }
+
     public DutySchedule? Schedule { get; set; }
-    public Guid? SecuringObjectId { get; set; }
+
+    public Guid? SecuringObjectId
+    {
+        get => _securingObjectId;
+        set
+        {
+            if (value == Guid.Empty)
+                throw new ArgumentException("SecuringObjectId не может быть пустым Guid.");
+            _securingObjectId = value;
+        }
+    }
+
     public string? SecuringObjectName { get; set; }
 }
