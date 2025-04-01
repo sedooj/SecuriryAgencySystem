@@ -28,6 +28,8 @@ public partial class CorporateClientsPage : ContentPage
     private async void OnViewButtonClicked(object sender, EventArgs e)
     {
         if ((sender as ImageButton)?.BindingContext is not CorporateClient selectedClient) return;
-        await Navigation.PushAsync(new ViewCorporateClientPage(selectedClient));
+        var viewClientPage = new ViewCorporateClientPage(selectedClient);
+        viewClientPage.ContractConcluded += (s, concluded) => { _controller.UpdateTable(); };
+        await Navigation.PushAsync(viewClientPage);
     }
 }

@@ -9,11 +9,11 @@ namespace SAS.Pages.Clients;
 public partial class ViewIndividualClientPage : ContentPage
 {
     private readonly IContractService _contractService = new ContractService();
-    public event EventHandler<IndividualClient>? ContractConcluded; 
+    public event EventHandler<IndividualClient>? ContractConcluded;
+
     public ViewIndividualClientPage(IndividualClient client)
     {
         InitializeComponent();
-        BindingContext = this;
         BindClientData(client);
     }
 
@@ -28,7 +28,7 @@ public partial class ViewIndividualClientPage : ContentPage
         ContractIdLabel.Text = "Контракт: " + client.ContractId;
         CreateContractButton.BindingContext = client;
     }
-    
+
     private void OnCloseButtonClicked(object sender, EventArgs e)
     {
         Navigation.PopAsync();
@@ -36,17 +36,17 @@ public partial class ViewIndividualClientPage : ContentPage
 
     private async void OnCreateContractButtonClicked(object sender, EventArgs e)
     {
-        if (sender is Button { BindingContext: IndividualClient individualClient})
+        if (sender is Button { BindingContext: IndividualClient individualClient })
         {
             var createContractPage = new CreateContractPage(individualClient);
             createContractPage.ContractConcluded += (s, contract) =>
             {
-                _contractService.CreateContract(contract);
-                _contractService.LinkContractToClient(contract.Id, contract.ClientId, individualClient.GetType());
+                _contractService.ProcessCreateContract(contract, individualClient.GetType());
                 ContractConcluded?.Invoke(this, individualClient);
                 ContractIdLabel.Text = "Контракт: " + contract.Id;
             };
             await Navigation.PushAsync(createContractPage);
         }
+        
     }
 }

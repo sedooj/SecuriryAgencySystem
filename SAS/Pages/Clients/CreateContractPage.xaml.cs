@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Core.Impl;
 using Core.Interface;
 using Core.Model;
@@ -94,10 +95,10 @@ public partial class CreateContractPage : ContentPage
         var endDateTime = EndDatePicker.Date.Add(EndTimePicker.Time);
         var schedule = new Schedule(startDateTime, endDateTime);
         var contractAmount = CalculateContractAmount(selectedObject);
-        Contract? contract = null;
         if (_corporateClient != null)
         {
-            contract = new Contract(
+            Debug.WriteLine(_corporateClient.Id);
+            var contract = new Contract(
                 Guid.NewGuid(),
                 new List<Guid>(), // Add logic to select employees
                 selectedObject.Id,
@@ -110,7 +111,7 @@ public partial class CreateContractPage : ContentPage
         }
         else if (_individualClient != null)
         {
-            contract = new Contract(
+            var contract = new Contract(
                 Guid.NewGuid(),
                 new List<Guid>(), // Add logic to select employees
                 selectedObject.Id,

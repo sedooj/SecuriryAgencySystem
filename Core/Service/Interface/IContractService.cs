@@ -10,4 +10,5 @@ public interface IContractService
     void LinkContractToClient(Guid contractId, Guid clientId, Type clientType);
     void PayContract(Guid contractId, Guid payerId, decimal amount);
     decimal CalculateContractAmount(SecuredObject securedObject);
+    void ProcessCreateContract(Contract contract, Type clientType);
 }

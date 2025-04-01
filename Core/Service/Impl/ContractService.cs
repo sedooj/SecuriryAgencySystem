@@ -71,4 +71,11 @@ public class ContractService : IContractService
         decimal contractAmount = ((decimal) securedObject.Area * baseRate * securityLevelMultiplier) + guardiansCost;
         return contractAmount;
     }
+
+    public void ProcessCreateContract(Contract contract, Type clientType)
+    {
+        CreateContract(contract);
+        LinkContractToClient(contract.Id, contract.ClientId, clientType);
+        PayContract(contract.Id, contract.ClientId, contract.ContractSum);
+    }
 }
