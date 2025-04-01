@@ -2,15 +2,87 @@ namespace Core.Model;
 
 public class SecuredObject
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Address { get; set; }
-    public double Area { get; set; }
-    public SecurityLevel SecurityLevel { get; set; }
-    public int GuardiansCount { get; set; }
-    public Guid? OwnerId { get; set; }
-    public bool IsOwned => OwnerId != null;
-    public OwnerType? OwnerType { get; set; }
+    private Guid _id;
+    private string _name;
+    private string _address;
+    private double _area;
+    private SecurityLevel _securityLevel;
+    private int _guardiansCount;
+    private Guid? _ownerId;
+    private OwnerType? _ownerType;
+
+    public Guid Id
+    {
+        get => _id;
+        set
+        {
+            if (value == Guid.Empty)
+                throw new ArgumentException("Id не может быть пустым Guid.");
+            _id = value;
+        }
+    }
+
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 100)
+                throw new ArgumentException("Название должно быть от 1 до 100 символов.");
+            _name = value;
+        }
+    }
+
+    public string Address
+    {
+        get => _address;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 200)
+                throw new ArgumentException("Адрес дол��ен быть от 1 до 200 символов.");
+            _address = value;
+        }
+    }
+
+    public double Area
+    {
+        get => _area;
+        set
+        {
+            if (value <= 0)
+                throw new ArgumentException("Площадь должна быть больше 0.");
+            _area = value;
+        }
+    }
+
+    public SecurityLevel SecurityLevel
+    {
+        get => _securityLevel;
+        set => _securityLevel = value;
+    }
+
+    public int GuardiansCount
+    {
+        get => _guardiansCount;
+        set
+        {
+            if (value < 1)
+                throw new ArgumentException("Количество охранников должно быть больше 0.");
+            _guardiansCount = value;
+        }
+    }
+
+    public Guid? OwnerId
+    {
+        get => _ownerId;
+        set => _ownerId = value;
+    }
+
+    public OwnerType? OwnerType
+    {
+        get => _ownerType;
+        set => _ownerType = value;
+    }
 
     private int CalculateGuardiansCount()
     {

@@ -76,13 +76,13 @@ public class BaseDataLoader
         return new List<IndividualClient>
         {
             new IndividualClient(Guid.NewGuid(),
-                new Passport("192394", "5011", DateTime.Now, "Шмелев", "Василий", "Владимирович", "Мужской",
+                new Passport("123456", "5011", DateTime.Now, "Шмелев", "Василий", "Владимирович", "Мужской",
                     "Казахстан"), null),
             new IndividualClient(Guid.NewGuid(),
-                new Passport("192394", "5001", DateTime.Now, "Сио", "Ши", "Мей", "Женский", "Китай"),
+                new Passport("654321", "5001", DateTime.Now, "Сио", "Ши", "Мей", "Женский", "Китай"),
                 null),
             new IndividualClient(Guid.NewGuid(),
-                new Passport("192394", "5001", DateTime.Now, "Руков", "Дмитрий", "Васильевич", "Мужской",
+                new Passport("789012", "5001", DateTime.Now, "Руков", "Дмитрий", "Васильевич", "Мужской",
                     "Российская Федерация"), null),
         };
     }
@@ -92,31 +92,31 @@ public class BaseDataLoader
         return new List<Employee>
         {
             new Employee(
-                new Passport("1238151123", "5021", DateTime.Now, "Суворов", "Игорь", "Николаевич", "Мужской",
+                new Passport("123456", "5021", DateTime.Now, "Суворов", "Игорь", "Николаевич", "Мужской",
                     "Российская Федерация"), Guid.NewGuid(), Guid.NewGuid(),
-                new JobRole("Старший менеджер", Role.Manager), new Documents("Улица Суворовская 24", "192355350912"),
+                new JobRole("Старший менеджер", Role.Manager), new Documents("Улица Суворовская 24", "1234567890"),
                 null, null, null, null, null),
             new Employee(
-                new Passport("1238151123", "5021", DateTime.Now, "Антошин", "Александр", "Алексеевич", "Мужской",
+                new Passport("234567", "5021", DateTime.Now, "Антошин", "Александр", "Алексеевич", "Мужской",
                     "Российская Федерация"), Guid.NewGuid(), Guid.NewGuid(),
-                new JobRole("Уборщик", Role.Cleaner), new Documents("Улица Александров 24", "95334850912"), null, null,
+                new JobRole("Уборщик", Role.Cleaner), new Documents("Улица Александров 24", "2345678901"), null, null,
                 null, null, null),
             new Employee(
-                new Passport("1238151123", "5021", DateTime.Now, "Шишкин", "Павел", "Сергеевич", "Мужской",
+                new Passport("345678", "5021", DateTime.Now, "Шишкин", "Павел", "Сергеевич", "Мужской",
                     "Российская Федерация"), Guid.NewGuid(), Guid.NewGuid(),
-                new JobRole("Охранник", Role.SecurityOfficer), new Documents("Улица Павлов 1", "711234850912"), null,
+                new JobRole("Охранник", Role.SecurityOfficer), new Documents("Улица Павлов 1", "3456789012"), null,
                 null, null, null, null),
             new Employee(
-                new Passport("1238151123", "5021", DateTime.Now, "Маков", "Григорий", "Анатольевич", "Мужской",
+                new Passport("456789", "5021", DateTime.Now, "Маков", "Григорий", "Анатольевич", "Мужской",
                     "Российская Федерация"), Guid.NewGuid(), Guid.NewGuid(),
-                new JobRole("Охранник", Role.SecurityOfficer), new Documents("Улица Григориев 33", "78234850912"), null,
+                new JobRole("Охранник", Role.SecurityOfficer), new Documents("Улица Григориев 33", "4567890123"), null,
                 null
                 , null, null, null),
             new Employee(
-                new Passport("1238151123", "5021", DateTime.Now, "Жигхенбев", "Макулбек", "Макулбекович", "Мужской",
+                new Passport("567890", "5021", DateTime.Now, "Жигхенбев", "Макулбек", "Макулбекович", "Мужской",
                     "Иностранный специалист"), Guid.NewGuid(), Guid.NewGuid(),
                 new JobRole("Охранник", Role.SecurityOfficer),
-                new Documents("Улица Расколотых Чурок 201", "21234850912"), null, null, null, null, null),
+                new Documents("Улица Расколотых Чурок 201", "5678901234"), null, null, null, null, null),
         };
     }
 
@@ -127,7 +127,7 @@ public class BaseDataLoader
         {
             new SecuredObject(Guid.NewGuid(), "Концертная площадка Цоколь", "Улица Цокольная 777", 70.2,
                 SecurityLevel.Medium, corporateClients[0].Id, OwnerType.Corp),
-            new SecuredObject(Guid.NewGuid(), "Супермаркет Шестёрочка", "Улица Шестёрочная 666", 105.1,
+            new SecuredObject(Guid.NewGuid(), "Супермаркет Шестёрочка", "Ули��а Шестёрочная 666", 105.1,
                 SecurityLevel.Low, corporateClients[1].Id, OwnerType.Corp),
             new SecuredObject(Guid.NewGuid(), "Филиал Сбебранк", "Улица Сбебра 14", 45.1, SecurityLevel.Medium,
                 corporateClients[2].Id, OwnerType.Corp),
