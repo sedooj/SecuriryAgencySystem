@@ -49,7 +49,7 @@ public class SecuredObject
         set
         {
             if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 200)
-                throw new ArgumentException("Адрес дол��ен быть от 1 до 200 символов.");
+                throw new ArgumentException("Адрес должен быть от 1 до 200 символов.");
             _address = value;
         }
     }
