@@ -8,4 +8,5 @@ public class Contract(Guid id, List<Guid> employeesId, Guid objectToSecureId, Sc
     public Schedule ContractTime { get; set; } = contractTime;
     public Guid? PaymentId { get; set; } = payment;
     public Guid ClientId { get; set; } = clientId;
+    public bool IsPaid => PaymentId != null;
 }

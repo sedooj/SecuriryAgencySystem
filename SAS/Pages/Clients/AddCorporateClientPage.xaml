@@ -6,7 +6,6 @@
     <ContentPage.Content>
         <StackLayout Padding="10" Spacing="10">
             <Entry x:Name="CompanyNameEntry" Placeholder="Название компании"/>
-            <Entry x:Name="ContractIdEntry" Placeholder="ID Контракта"/>
             <Button Text="Сохранить" Clicked="OnSaveButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>

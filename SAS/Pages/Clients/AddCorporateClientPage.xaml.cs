@@ -16,7 +16,7 @@ public partial class AddCorporateClientPage : ContentPage
         var newClient = new CorporateClient(
             Guid.NewGuid(),
             CompanyNameEntry.Text,
-            Guid.Parse(ContractIdEntry.Text)
+            Guid.NewGuid()
         );
 
         ClientAdded?.Invoke(this, newClient);
