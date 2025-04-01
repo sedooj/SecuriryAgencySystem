@@ -10,7 +10,7 @@ public class PaymentService : IPaymentService
     private readonly IDbService<Contract> _contractDbService = new JsonDbService<Contract>();
     private readonly IDbService<Payment> _paymentDbService = new JsonDbService<Payment>();
 
-    public void ProcessPayment(Guid contractId, Guid payerId, decimal amount)
+    public Contract ProcessPayment(Guid contractId, Guid payerId, decimal amount)
     {
         if (!ValidatePayment(amount)) throw new ArgumentException("Payment amount is invalid");
         var payment = new Payment(Guid.NewGuid(), payerId, DateTime.Now, amount);
@@ -19,6 +19,7 @@ public class PaymentService : IPaymentService
                        throw new ArgumentNullException($"Contract with id {contractId} not found");
         contract.PaymentId = payment.Id;
         _contractDbService.UpdateEntity(contractId, contract);
+        return contract;
     }
 
     private bool ValidatePayment(decimal amount)

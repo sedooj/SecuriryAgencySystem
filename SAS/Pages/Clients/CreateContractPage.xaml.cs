@@ -97,7 +97,6 @@ public partial class CreateContractPage : ContentPage
         var contractAmount = CalculateContractAmount(selectedObject);
         if (_corporateClient != null)
         {
-            Debug.WriteLine(_corporateClient.Id);
             var contract = new Contract(
                 Guid.NewGuid(),
                 new List<Guid>(), // Add logic to select employees
