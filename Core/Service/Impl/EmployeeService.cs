@@ -1,6 +1,7 @@
 using Core.Exception;
 using Core.Impl;
 using Core.Interface;
+using Core.Model;
 using Core.Model.Users;
 using Core.Service.Interface;
 
@@ -8,8 +9,7 @@ namespace Core.Service.Impl;
 
 public class EmployeeService : IEmployeeService
 {
-    private readonly IDBService<Employee> _employeeDbService = new JsonDbService<Employee>();
-    private readonly IDBService<Guardian> _guardianDbService = new JsonDbService<Guardian>();
+    private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
 
     public decimal CalculateSalary(Employee employee)
     {
@@ -18,55 +18,38 @@ public class EmployeeService : IEmployeeService
 
     public void ManageEmployeeJobRole(Employee employee, JobRole jobRole)
     {
-        if (jobRole.Role == Role.SecurityOfficer)
-        {
-            var guardian = new Guardian(employee.Documents, [], [], null, null, employee.Passport);
-            _guardianDbService.SaveEntity(guardian);
-            _employeeDbService.DeleteEntity(employee.Id);
-            return;
-        }
-
         employee.JobRole = jobRole;
         _employeeDbService.UpdateEntity(employee.Id, employee);
     }
 
-    public void ManageEmployeeJobRole(Guardian guardian, JobRole jobRole)
+    public void AssignWeapon(Employee employee, Guid weaponId)
     {
-        if (jobRole.Role != Role.SecurityOfficer)
-        {
-            var employee = new Employee(guardian.Passport, jobRole, guardian.Documents);
-            _employeeDbService.SaveEntity(employee);
-            _guardianDbService.DeleteEntity(guardian.Id);
-            return;
-        }
-        guardian.JobRole = jobRole;
-        _employeeDbService.UpdateEntity(guardian.Id, guardian);
+        if (employee.Weapons == null)
+            employee.Weapons = new List<Guid>();
+        else
+            employee.Weapons.Add(weaponId);
+        _employeeDbService.UpdateEntity(employee.Id, employee);
     }
 
-    public void AssignWeapon(Guardian guardian, Guid weaponId)
+    public void AssignSpecialEquipment(Employee employee, Guid equipment)
     {
-        guardian.Weapons.Add(weaponId);
-        _guardianDbService.UpdateEntity(guardian.Id, guardian);
-    }
-
-    public void AssignSpecialEquipment(Guardian guardian, Guid equipment)
-    {
-        var equipments = guardian.SpecialEquipments != null ? [..guardian.SpecialEquipments] : new List<Guid>();
+        var equipments = employee.SpecialEquipments != null ? [..employee.SpecialEquipments] : new List<Guid>();
         equipments.Add(equipment);
-        guardian.SpecialEquipments = equipments;
-        _guardianDbService.UpdateEntity(guardian.Id, guardian);
+        employee.SpecialEquipments = equipments;
+        _employeeDbService.UpdateEntity(employee.Id, employee);
     }
 
-    public void UnassignWeapon(Guardian guardian, Guid weaponId)
+    public void UnassignWeapon(Employee employee, Guid weaponId)
     {
-        guardian.Weapons.Remove(weaponId);
-        _guardianDbService.UpdateEntity(guardian.Id, guardian);
+        if (employee.Weapons == null) throw new SecurityEquipmentNullException();
+        employee.Weapons.Remove(weaponId);
+        _employeeDbService.UpdateEntity(employee.Id, employee);
     }
 
-    public void UnassignSpecialEquipment(Guardian guardian, Guid equipment)
+    public void UnassignSpecialEquipment(Employee employee, Guid equipment)
     {
-        if (guardian.SpecialEquipments == null) throw new SecurityEquipmentNullException();
-        guardian.SpecialEquipments.Remove(equipment);
-        _guardianDbService.UpdateEntity(guardian.Id, guardian);
+        if (employee.SpecialEquipments == null) throw new SecurityEquipmentNullException();
+        employee.SpecialEquipments.Remove(equipment);
+        _employeeDbService.UpdateEntity(employee.Id, employee);
     }
 }

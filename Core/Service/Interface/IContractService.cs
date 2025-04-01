@@ -4,9 +4,12 @@ namespace Core.Service.Interface;
 
 public interface IContractService
 {
-    void CreateContract(Contract contract);
-    void UpdateContract(Contract contract);
-    void ArchiveContract(Guid contractId);
+    Contract CreateContract(Contract contract);
+    Contract UpdateContract(Contract contract);
+    Contract ArchiveContract(Guid contractId);
     void LinkContractToClient(Guid contractId, Guid clientId, Type clientType);
-    void PayContract(Guid contractId, Guid payerId, decimal amount);
+    Contract PayContract(Guid contractId, Guid payerId, decimal amount);
+    decimal CalculateContractAmount(SecuredObject securedObject);
+    void ProcessCreateContract(Contract contract, Type clientType);
+    Contract AssignStaffToContract(Contract contract, List<Guid> securities);
 }

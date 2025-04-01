@@ -2,51 +2,82 @@ namespace Core.Model.Users;
 
 public class Employee : Person
 {
+    private Documents _documents;
+    private JobRole _jobRole;
+    private Guid _licenseId;
+    private Guid? _securingObjectId;
+
     public Employee(
         Passport passport,
+        Guid id,
+        Guid licenseId,
         JobRole jobRole,
-        Documents documents) : base(passport)
+        Documents documents,
+        List<Guid>? specialEquipments,
+        List<Guid>? weapons,
+        DutySchedule? schedule,
+        Guid? securingObjectId,
+        string? securingObjectName) : base(passport, id)
     {
+        LicenseId = licenseId;
         JobRole = jobRole;
         Documents = documents;
+        SpecialEquipments = specialEquipments;
+        Weapons = weapons;
+        Schedule = schedule;
+        SecuringObjectId = securingObjectId;
+        SecuringObjectName = securingObjectName;
     }
 
-    public Guid LicenseId { get; } = Guid.NewGuid();
-    public Guid EmployeeId { get; } = Guid.NewGuid();
-    public JobRole JobRole { get; set; }
-    public Documents Documents { get; set; }
-    
-}
-
-public class JobRole
-{
-    public JobRole(string position, Role role)
+    public Guid LicenseId
     {
-        Position = position;
-        Role = role;
-    }
-
-    public string Position { get; set; }
-    public Role Role { get; set; }
-    public decimal Salary => GetSalaryByRole(Role);
-
-    private decimal GetSalaryByRole(Role employeeRole)
-    {
-        return employeeRole switch
+        get => _licenseId;
+        set
         {
-            Role.SecurityOfficer => 50000,
-            Role.Cleaner => 32000,
-            Role.Manager => 70000,
-            Role.Director => 90000,
-            _ => 0
-        };
+            if (value == Guid.Empty)
+                throw new ArgumentException("LicenseId не может быть пустым.");
+            _licenseId = value;
+        }
     }
-}
 
-public enum Role
-{
-    SecurityOfficer,
-    Cleaner,
-    Manager,
-    Director
+    public JobRole JobRole
+    {
+        get => _jobRole;
+        set
+        {
+            if (value == null)
+                throw new ArgumentException("JobRole не может быть null.");
+            _jobRole = value;
+        }
+    }
+
+    public Documents Documents
+    {
+        get => _documents;
+        set
+        {
+            if (value == null)
+                throw new ArgumentException("Documents не может быть null.");
+            _documents = value;
+        }
+    }
+
+    public List<Guid>? SpecialEquipments { get; set; }
+
+    public List<Guid>? Weapons { get; set; }
+
+    public DutySchedule? Schedule { get; set; }
+
+    public Guid? SecuringObjectId
+    {
+        get => _securingObjectId;
+        set
+        {
+            if (value == Guid.Empty)
+                throw new ArgumentException("SecuringObjectId не может быть пустым Guid.");
+            _securingObjectId = value;
+        }
+    }
+
+    public string? SecuringObjectName { get; set; }
 }

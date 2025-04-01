@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SAS.Pages.Employees.ViewEmployeePage"
+             Title="Просмотр сотрудника">
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <Label x:Name="FirstNameLabel" />
+            <Label x:Name="LastNameLabel" />
+            <Label x:Name="MiddleNameLabel" />
+            <Label x:Name="PositionLabel" />
+            <Label x:Name="AddressLabel" />
+            <Label x:Name="PassportNumberLabel" />
+            <Label x:Name="PassportIssueDateLabel" />
+            <Label x:Name="GenderLabel" />
+            <Label x:Name="CountryLabel" />
+            <Label x:Name="InnLabel" />
+            <Label x:Name="PfrIdLabel" />
+            <Button Text="Закрыть" Clicked="OnCloseButtonClicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

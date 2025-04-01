@@ -1,7 +1,6 @@
 namespace Core.Model.Users;
 
-public class IndividualClient(Passport passport) : Person(passport)
+public class IndividualClient(Guid id, Passport passport, Guid? contractId) : Person(passport, id)
 {
-    public Guid ClientId { get; } = Guid.NewGuid();
-    public Guid ContractId { get; set; }
+    public Guid? ContractId { get; set; } = contractId;
 }

@@ -1,19 +1,36 @@
 using System.Diagnostics;
+using System.IO;
+using Core.Exception;
 using Core.Interface;
 
 namespace Core.Impl;
 
-public class JsonDbService<T> : IDBService<T> where T : class
+public class JsonDbService<T> : IDbService<T> where T : class
 {
-    private readonly JsonObjectSerializer _serializer = new();
     private readonly string _dbDir = new PathBuilder().GetTablePath(typeof(T));
-    
+    private readonly JsonObjectSerializer _serializer = new();
+
+    public JsonDbService()
+    {
+        var directory = Path.GetDirectoryName(_dbDir);
+        if (directory == null) throw new UnsupportedDirectory();
+        if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+    }
+
     public List<T> LoadEntities()
     {
-        if (!File.Exists(_dbDir)) return new List<T>();
-        var jsonString = File.ReadAllText(_dbDir);
-        var entities = _serializer.Deserialize<List<T>>(jsonString);
-        return entities ?? [];
+        try
+        {
+            if (!File.Exists(_dbDir)) return new List<T>();
+            var jsonString = File.ReadAllText(_dbDir);
+            var entities = _serializer.Deserialize<List<T>>(jsonString);
+            return entities ?? new List<T>();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.WriteLine($"Error loading entities: {ex.Message}");
+            return new List<T>();
+        }
     }
 
     public T? LoadEntity(Guid id)
@@ -24,55 +41,77 @@ public class JsonDbService<T> : IDBService<T> where T : class
 
     public void SaveEntity(T entity)
     {
-        var entities = LoadEntities().ToList();
-        entities.Add(entity);
-        SaveEntitiesToFile(entities);
+        try
+        {
+            var entities = LoadEntities();
+            entities.Add(entity);
+            SaveEntitiesToFile(entities);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.WriteLine($"Error saving entity: {ex.Message}");
+        }
     }
 
     public void UpdateEntity(Guid id, T updatedEntity)
     {
-        var entities = LoadEntities().ToList();
-        var index = entities.FindIndex(e => GetEntityId(e) == id);
-        if (index != -1)
+        try
         {
-            entities[index] = updatedEntity;
-        }
-        else
-        {
-            entities.Add(updatedEntity);
-        }
-        SaveEntitiesToFile(entities);
-    }
-    
-    public void DeleteEntity(Guid id)
-    {
-        var entities = LoadEntities().ToList();
-        var entityToRemove = entities.FirstOrDefault(e => GetEntityId(e) == id);
-        if (entityToRemove != null)
-        {
-            entities.Remove(entityToRemove);
+            var entities = LoadEntities();
+            var index = entities.FindIndex(e => GetEntityId(e) == id);
+            if (index != -1)
+                entities[index] = updatedEntity;
+            else
+                entities.Add(updatedEntity);
             SaveEntitiesToFile(entities);
         }
-        else
+        catch (System.Exception ex)
         {
-            throw new InvalidOperationException($"Entity with id {id} not found.");
+            Debug.WriteLine($"Error updating entity: {ex.Message}");
+        }
+    }
+
+    public void DeleteEntity(Guid id)
+    {
+        try
+        {
+            var entities = LoadEntities();
+            var entityToRemove = entities.FirstOrDefault(e => GetEntityId(e) == id);
+            if (entityToRemove != null)
+            {
+                entities.Remove(entityToRemove);
+                SaveEntitiesToFile(entities);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Entity with id {id} not found.");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.WriteLine($"Error deleting entity: {ex.Message}");
         }
     }
 
     private void SaveEntitiesToFile(List<T> entities)
     {
-        var jsonString = _serializer.Serialize(entities);
-        File.WriteAllText(_dbDir, jsonString);
-        Debug.WriteLine($"Entities saved successfully to {_dbDir}.");
+        try
+        {
+            var jsonString = _serializer.Serialize(entities);
+            File.WriteAllText(_dbDir, jsonString);
+            Debug.WriteLine($"Entities saved successfully to {_dbDir}.");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.WriteLine($"Error saving entities to file: {ex.Message}");
+        }
     }
 
     private Guid GetEntityId(T entity)
     {
         var property = typeof(T).GetProperty("Id");
         if (property != null && property.PropertyType == typeof(Guid))
-        {
             return (Guid)(property.GetValue(entity) ?? Guid.Empty);
-        }
         throw new InvalidOperationException("Entity does not have a Guid Id property.");
     }
 }

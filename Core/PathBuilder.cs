@@ -19,9 +19,7 @@ public class PathBuilder
 
     private string GetDocumentsDirectory()
     {
-        var directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        var dbDir = Path.Combine(directoryPath, "SecurityAgencySystem");
-        return dbDir;
+        return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/SecurityAgencySystem/";
     }
 
     private string FindTableForType(Type type)
@@ -34,6 +32,8 @@ public class PathBuilder
             not null when type == typeof(Employee) => "employees",
             not null when type == typeof(Person) => "persons",
             not null when type == typeof(Weapon) => "weapons",
+            not null when type == typeof(SecuredObject) => "secured_objects",
+            not null when type == typeof(Payment) => "payments",
             _ => throw new NullReferenceException($"Can't find table for type: {type}")
         };
         return typeDir;

@@ -7,9 +7,9 @@ namespace Core.Service.Impl;
 
 public class ClientService : IClientService
 {
-    private readonly IDBService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
-    private readonly IDBService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
-    
+    private readonly IDbService<CorporateClient> _corporateClientDbService = new JsonDbService<CorporateClient>();
+    private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
+
     public void CreateClient(CorporateClient corporateClient)
     {
         _corporateClientDbService.SaveEntity(corporateClient);
@@ -28,5 +28,15 @@ public class ClientService : IClientService
     public void UpdateClient(IndividualClient individualClient)
     {
         _individualClientDbService.UpdateEntity(individualClient.Id, individualClient);
+    }
+
+    public List<IndividualClient> LoadIndividualClients()
+    {
+        return _individualClientDbService.LoadEntities();
+    }
+
+    public List<CorporateClient> LoadCorporateClients()
+    {
+        return _corporateClientDbService.LoadEntities();
     }
 }

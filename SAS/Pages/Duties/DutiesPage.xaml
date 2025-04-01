@@ -1,0 +1,34 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SAS.Pages.Duties.DutiesPage">
+    <StackLayout Padding="10">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="Активные дежурства" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand" />
+            <ImageButton Source="refresh.png" Clicked="OnRefreshClicked" WidthRequest="30" HeightRequest="30"
+                         HorizontalOptions="End" VerticalOptions="Center" />
+        </StackLayout>
+        <BoxView HeightRequest="1" Color="LightGray" Margin="0,10,0,10" />
+        <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+            <Label Grid.Column="0" Text="Охранник" FontAttributes="Bold" />
+            <Label Grid.Column="1" Text="Дата дежурства" FontAttributes="Bold" />
+            <Label Grid.Column="2" Text="Время дежурства" FontAttributes="Bold" />
+            <Label Grid.Column="3" Text="Объект" FontAttributes="Bold" />
+        </Grid>
+        <ScrollView>
+            <CollectionView x:Name="DutiesCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+                            <Label Grid.Column="0" Text="{Binding Employee.Passport.FullName}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding Duty.Schedule.WorkingDate}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{Binding Duty.Schedule.WorkingTime}" VerticalOptions="Center" />
+                            <Label Grid.Column="3" Text="{Binding Employee.SecuringObjectName}"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </StackLayout>
+</ContentView>

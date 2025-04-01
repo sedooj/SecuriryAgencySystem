@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SAS.Pages.ReportsPage"
+             Title="Отчёты">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="10">
+            <Button Text="Сгенерировать график дежурств" Clicked="OnGenerateDutyScheduleClick" Margin="10" />
+            <Button Text="Сгенерировать финансовый отчет" Clicked="OnGenerateFinancialReportClick" Margin="10" />
+            <Button Text="Сгенерировать счет клиенту" Clicked="OnGenerateClientInvoiceClick" Margin="10" />
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

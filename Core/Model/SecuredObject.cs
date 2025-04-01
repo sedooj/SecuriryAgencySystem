@@ -2,13 +2,85 @@ namespace Core.Model;
 
 public class SecuredObject
 {
-    public Guid Id { get; } = Guid.NewGuid();
-    public string Name { get; set; }
-    public string Address { get; set; }
-    public string ObjectType { get; set; }
-    public double Area { get; set; }
+    private string _address;
+    private double _area;
+    private int _guardiansCount;
+    private Guid _id;
+    private string _name;
+
+    public SecuredObject(Guid id, string name, string address, double area, SecurityLevel securityLevel, Guid? ownerId,
+        OwnerType? ownerType)
+    {
+        Id = id;
+        Name = name;
+        Address = address;
+        Area = area;
+        SecurityLevel = securityLevel;
+        GuardiansCount = CalculateGuardiansCount();
+        OwnerId = ownerId;
+        OwnerType = ownerType;
+    }
+
+    public Guid Id
+    {
+        get => _id;
+        set
+        {
+            if (value == Guid.Empty)
+                throw new ArgumentException("Id не может быть пустым Guid.");
+            _id = value;
+        }
+    }
+
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 100)
+                throw new ArgumentException("Название должно быть от 1 до 100 символов.");
+            _name = value;
+        }
+    }
+
+    public string Address
+    {
+        get => _address;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 200)
+                throw new ArgumentException("Адрес должен быть от 1 до 200 символов.");
+            _address = value;
+        }
+    }
+
+    public double Area
+    {
+        get => _area;
+        set
+        {
+            if (value <= 0)
+                throw new ArgumentException("Площадь должна быть больше 0.");
+            _area = value;
+        }
+    }
+
     public SecurityLevel SecurityLevel { get; set; }
-    public int GuardiansCount { get; set; }
+
+    public int GuardiansCount
+    {
+        get => _guardiansCount;
+        set
+        {
+            if (value < 1)
+                throw new ArgumentException("Количество охранников должно быть больше 0.");
+            _guardiansCount = value;
+        }
+    }
+
+    public Guid? OwnerId { get; set; }
+
+    public OwnerType? OwnerType { get; set; }
 
     private int CalculateGuardiansCount()
     {
@@ -21,22 +93,18 @@ public class SecuredObject
             _ => 1
         };
     }
-
-    public SecuredObject(string name, string address, string objectType, double area, SecurityLevel securityLevel)
-    {
-        Name = name;
-        Address = address;
-        ObjectType = objectType;
-        Area = area;
-        SecurityLevel = securityLevel;
-        GuardiansCount = CalculateGuardiansCount();
-    }
 }
 
 public enum SecurityLevel
 {
-    Low,      // Низкий уровень охраны (пл. объекта до 500кв.м)
-    Medium,   // Средний уровень охраны (пл. объекта от 500кв.м до 1000кв.м)
-    High,     // Высокий уровень охраны (пл. объекта от 1000кв.м до 3000кв.м)
-    Hard      // Уровень повышенной охраны (пл. объекта >3000 кв.м)
+    Low, // Низкий уровень охраны (пл. объекта до 500кв.м)
+    Medium, // Средний уровень охраны (пл. объекта от 500кв.м до 1000кв.м)
+    High, // Высокий уровень охраны (пл. объекта от 1000кв.м до 3000кв.м)
+    Hard // Уровень повышенной охраны (пл. объекта >3000 кв.м)
+}
+
+public enum OwnerType
+{
+    Individual,
+    Corp
 }
