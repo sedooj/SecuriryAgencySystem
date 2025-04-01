@@ -89,8 +89,8 @@ public class BaseDataLoader
 
     private List<Employee> LoadBaseEmployees()
     {
-        return new List<Employee>
-        {
+        var emps = new List<Employee>
+        { 
             new Employee(
                 new Passport("123456", "5021", DateTime.Now, "Суворов", "Игорь", "Николаевич", "Мужской",
                     "Российская Федерация"), Guid.NewGuid(), Guid.NewGuid(),
@@ -118,6 +118,16 @@ public class BaseDataLoader
                 new JobRole("Охранник", Role.SecurityOfficer),
                 new Documents("Улица Расколотых Чурок 201", "5678901234"), null, null, null, null, null),
         };
+        for (int i = 0; i < 50; i++)
+        {
+            emps.Add(new Employee(
+                new Passport($"{new Random().Next(100000, 999999)}", $"{new Random().Next(5000,5025)}", DateTime.Now, "Охранов", $"Охранник-{i+1}-й", "Охранникович", "Мужской",
+                    "Российская Федерация"), Guid.NewGuid(), Guid.NewGuid(),
+                new JobRole("Охранник", Role.SecurityOfficer), new Documents($"Улица Охранная {i+1}", "1234567890"), null, null,
+                null, null, null));
+        }
+
+        return emps;
     }
 
     private List<SecuredObject> LoadBaseSecuredObjects(List<IndividualClient> individualClients,

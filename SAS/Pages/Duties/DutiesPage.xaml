@@ -3,7 +3,7 @@
              x:Class="SAS.Pages.Duties.DutiesPage">
     <StackLayout Padding="10">
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Label Text="Активные дежурства" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Активные дежурства" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
             <ImageButton Source="refresh.png" Clicked="OnRefreshClicked" WidthRequest="30" HeightRequest="30" HorizontalOptions="End" VerticalOptions="Center"/>
         </StackLayout>
         <BoxView HeightRequest="1" Color="LightGray" Margin="0,10,0,10"/>

@@ -15,11 +15,6 @@ public partial class MainMenu : ContentPage
         InitializeComponent();
     }
 
-    private void UpdateDutiesTable()
-    {
-        
-    }
-
     private async void OnEmployeesButtonClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new EmployeesPage());
@@ -33,11 +28,6 @@ public partial class MainMenu : ContentPage
     private async void OnReportsButtonClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new ReportsPage());
-    }
-
-    private void OnSettingsButtonClicked(object sender, EventArgs e)
-    {
-        // Handle Settings button click
     }
 
     private void OnLoadBaseDataClicked(object sender, EventArgs e)

@@ -22,8 +22,6 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
                     <Button Text="Сотрудники" WidthRequest="200" HeightRequest="70" Clicked="OnEmployeesButtonClicked"/>
                     <Button Text="Клиенты" WidthRequest="200" HeightRequest="70" Clicked="OnClientsButtonClicked"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
                     <Button Text="Отчёты" WidthRequest="200" HeightRequest="70" Clicked="OnReportsButtonClicked"/>
                 </StackLayout>
             </StackLayout>

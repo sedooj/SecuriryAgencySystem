@@ -5,55 +5,31 @@
              x:Class="SAS.Pages.Employees.EmployeesPage"
              Title="Сотрудники">
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Button Text="Добавить сотрудника" Clicked="OnAddEmployeeClicked"/>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Button Text="Добавить сотрудника" Clicked="OnAddEmployeeClicked" />
 
-            <Grid Padding="10" ColumnDefinitions="*,*,*">
-                <Label Grid.Column="0" Text="ФИО" FontAttributes="Bold"/>
-                <Label Grid.Column="1" Text="Должность" FontAttributes="Bold"/>
-                <Label Grid.Column="2" Text="" FontAttributes="Bold"/>
-            </Grid>
+                <Grid Padding="10" ColumnDefinitions="*,*,*">
+                    <Label Grid.Column="0" Text="ФИО" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="Должность" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="" FontAttributes="Bold" />
+                </Grid>
 
-            <CollectionView x:Name="EmployeesList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10" ColumnDefinitions="*,*,*">
-                            <Label Grid.Column="0" Text="{Binding Passport.FullName}" FontAttributes="Bold" VerticalOptions="Center"/>
-                            <Label Grid.Column="1" Text="{Binding JobRole.Position}" VerticalOptions="Center"/>
-                            <ImageButton Grid.Column="2" BindingContext="{Binding}" HorizontalOptions="End" Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <StackLayout x:Name="EmployeeDetails" IsVisible="False" Padding="10">
-                <Label Text="Личные данные" FontAttributes="Bold"/>
-                <Label Text="ФИО: " x:Name="EmployeeFullName"/>
-                <Label Text="Адрес: " x:Name="EmployeeAddress"/>
-                <Label Text="Должность: " x:Name="EmployeePosition"/>
-                <Label Text="Оклад: " x:Name="EmployeeSalary"/>
-
-                <Label Text="Право на ношение оружия" FontAttributes="Bold"/>
-                <Label Text="Марка: " x:Name="WeaponBrand"/>
-                <Label Text="Номер: " x:Name="WeaponNumber"/>
-
-                <Label Text="Закрепленные спецсредства" FontAttributes="Bold"/>
-                <Label x:Name="SpecialEquipment"/>
-
-                <Label Text="Документы" FontAttributes="Bold"/>
-                <Label Text="Лицензия: " x:Name="DocumentLicense"/>
-                <Label Text="ИНН: " x:Name="DocumentINN"/>
-                <Label Text="ПФР: " x:Name="DocumentPFR"/>
-
-                <Label Text="График дежурств" FontAttributes="Bold"/>
-                <Label x:Name="DutySchedule"/>
-
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
-                    <Button Text="Редактировать" Clicked="OnEditEmployeeClicked"/>
-                    <Button Text="Уволить" Clicked="OnDismissEmployeeClicked"/>
-                    <Button Text="Удалить" Clicked="OnDeleteEmployeeClicked"/>
-                </StackLayout>
+                <CollectionView x:Name="EmployeesList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10" ColumnDefinitions="*,*,*">
+                                <Label Grid.Column="0" Text="{Binding Passport.FullName}" FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding JobRole.Position}" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" BindingContext="{Binding}" HorizontalOptions="End"
+                                             Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25"
+                                             HeightRequest="25" VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
