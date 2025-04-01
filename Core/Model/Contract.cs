@@ -1,106 +1,92 @@
-namespace Core.Model
+namespace Core.Model;
+
+public class Contract
 {
-    public class Contract
+    private Guid _clientId;
+    private decimal _contractSum;
+    private Schedule _contractTime;
+    private Guid _id;
+    private Guid _objectToSecureId;
+
+    public Contract(
+        Guid id,
+        List<Guid> employeesId,
+        Guid objectToSecureId,
+        Schedule contractTime,
+        Guid? paymentId,
+        Guid clientId,
+        decimal contractSum)
     {
-        private Guid _id;
-        private Guid _objectToSecureId;
-        private List<Guid> _employeesId;
-        private Schedule _contractTime;
-        private Guid? _paymentId;
-        private Guid _clientId;
-        private decimal _contractSum;
+        Id = id;
+        EmployeesId = employeesId;
+        ObjectToSecureId = objectToSecureId;
+        ContractTime = contractTime;
+        PaymentId = paymentId;
+        ClientId = clientId;
+        ContractSum = contractSum;
+    }
 
-        public Contract(
-            Guid id,
-            List<Guid> employeesId,
-            Guid objectToSecureId,
-            Schedule contractTime,
-            Guid? paymentId,
-            Guid clientId,
-            decimal contractSum)
+    public Guid Id
+    {
+        get => _id;
+        set
         {
-            Id = id;
-            EmployeesId = employeesId;
-            ObjectToSecureId = objectToSecureId;
-            ContractTime = contractTime;
-            PaymentId = paymentId;
-            ClientId = clientId;
-            ContractSum = contractSum;
+            if (value == Guid.Empty)
+                throw new ArgumentException("Id не может быть пустым Guid.");
+            _id = value;
         }
+    }
 
-        public Guid Id
+    public Guid ObjectToSecureId
+    {
+        get => _objectToSecureId;
+        set
         {
-            get => _id;
-            set
-            {
-                if (value == Guid.Empty)
-                    throw new ArgumentException("Id не может быть пустым Guid.");
-                _id = value;
-            }
+            if (value == Guid.Empty)
+                throw new ArgumentException("ObjectToSecureId не может быть пустым Guid.");
+            _objectToSecureId = value;
         }
+    }
 
-        public Guid ObjectToSecureId
-        {
-            get => _objectToSecureId;
-            set
-            {
-                if (value == Guid.Empty)
-                    throw new ArgumentException("ObjectToSecureId не может быть пустым Guid.");
-                _objectToSecureId = value;
-            }
-        }
+    public List<Guid> EmployeesId { get; set; }
 
-        public List<Guid> EmployeesId
+    public Schedule ContractTime
+    {
+        get => _contractTime;
+        set
         {
-            get => _employeesId;
-            set
-            {
-                _employeesId = value;
-            }
+            if (value == null)
+                throw new ArgumentException("ContractTime не может быть null.");
+            _contractTime = value;
         }
+    }
 
-        public Schedule ContractTime
-        {
-            get => _contractTime;
-            set
-            {
-                if (value == null)
-                    throw new ArgumentException("ContractTime не может быть null.");
-                _contractTime = value;
-            }
-        }
+    public Guid? PaymentId { get; set; }
 
-        public Guid? PaymentId
+    public Guid ClientId
+    {
+        get => _clientId;
+        set
         {
-            get => _paymentId;
-            set => _paymentId = value;
+            if (value == Guid.Empty)
+                throw new ArgumentException("ClientId не может быть пустым Guid.");
+            _clientId = value;
         }
+    }
 
-        public Guid ClientId
+    public decimal ContractSum
+    {
+        get => _contractSum;
+        set
         {
-            get => _clientId;
-            set
-            {
-                if (value == Guid.Empty)
-                    throw new ArgumentException("ClientId не может быть пустым Guid.");
-                _clientId = value;
-            }
+            if (value <= 0)
+                throw new ArgumentException("Сумма оплаты договора должна быть больше 0.");
+            _contractSum = value;
         }
+    }
 
-        public decimal ContractSum
-        {
-            get => _contractSum;
-            set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("Сумма оплаты договора должна быть больше 0.");
-                _contractSum = value;
-            }
-        }
-
-        public bool IsContractPaid()
-        {
-            return PaymentId != null;
-        }
+    public bool IsContractPaid()
+    {
+        return PaymentId != null;
     }
 }

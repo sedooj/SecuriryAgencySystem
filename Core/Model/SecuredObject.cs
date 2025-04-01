@@ -2,14 +2,24 @@ namespace Core.Model;
 
 public class SecuredObject
 {
-    private Guid _id;
-    private string _name;
     private string _address;
     private double _area;
-    private SecurityLevel _securityLevel;
     private int _guardiansCount;
-    private Guid? _ownerId;
-    private OwnerType? _ownerType;
+    private Guid _id;
+    private string _name;
+
+    public SecuredObject(Guid id, string name, string address, double area, SecurityLevel securityLevel, Guid? ownerId,
+        OwnerType? ownerType)
+    {
+        Id = id;
+        Name = name;
+        Address = address;
+        Area = area;
+        SecurityLevel = securityLevel;
+        GuardiansCount = CalculateGuardiansCount();
+        OwnerId = ownerId;
+        OwnerType = ownerType;
+    }
 
     public Guid Id
     {
@@ -55,11 +65,7 @@ public class SecuredObject
         }
     }
 
-    public SecurityLevel SecurityLevel
-    {
-        get => _securityLevel;
-        set => _securityLevel = value;
-    }
+    public SecurityLevel SecurityLevel { get; set; }
 
     public int GuardiansCount
     {
@@ -72,17 +78,9 @@ public class SecuredObject
         }
     }
 
-    public Guid? OwnerId
-    {
-        get => _ownerId;
-        set => _ownerId = value;
-    }
+    public Guid? OwnerId { get; set; }
 
-    public OwnerType? OwnerType
-    {
-        get => _ownerType;
-        set => _ownerType = value;
-    }
+    public OwnerType? OwnerType { get; set; }
 
     private int CalculateGuardiansCount()
     {
@@ -95,26 +93,14 @@ public class SecuredObject
             _ => 1
         };
     }
-
-    public SecuredObject(Guid id, string name, string address, double area, SecurityLevel securityLevel, Guid? ownerId, OwnerType? ownerType)
-    {
-        Id = id;
-        Name = name;
-        Address = address;
-        Area = area;
-        SecurityLevel = securityLevel;
-        GuardiansCount = CalculateGuardiansCount();
-        OwnerId = ownerId;
-        OwnerType = ownerType;
-    }
 }
 
 public enum SecurityLevel
 {
-    Low,      // Низкий уровень охраны (пл. объекта до 500кв.м)
-    Medium,   // Средний уровень охраны (пл. объекта от 500кв.м до 1000кв.м)
-    High,     // Высокий уровень охраны (пл. объекта от 1000кв.м до 3000кв.м)
-    Hard      // Уровень повышенной охраны (пл. объекта >3000 кв.м)
+    Low, // Низкий уровень охраны (пл. объекта до 500кв.м)
+    Medium, // Средний уровень охраны (пл. объекта от 500кв.м до 1000кв.м)
+    High, // Высокий уровень охраны (пл. объекта от 1000кв.м до 3000кв.м)
+    Hard // Уровень повышенной охраны (пл. объекта >3000 кв.м)
 }
 
 public enum OwnerType

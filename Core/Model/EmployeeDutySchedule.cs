@@ -1,52 +1,50 @@
-using System;
 using Core.Model.Users;
 
-namespace Core.Model
+namespace Core.Model;
+
+public class EmployeeDutySchedule
 {
-    public class EmployeeDutySchedule
+    private DutySchedule _duty;
+    private Employee _employee;
+    private Guid _securingObjectId;
+
+    public EmployeeDutySchedule(Employee employee, DutySchedule duty, Guid securingObjectId)
     {
-        private Employee _employee;
-        private DutySchedule _duty;
-        private Guid _securingObjectId;
+        Employee = employee;
+        Duty = duty;
+        SecuringObjectId = securingObjectId;
+    }
 
-        public EmployeeDutySchedule(Employee employee, DutySchedule duty, Guid securingObjectId)
+    public Employee Employee
+    {
+        get => _employee;
+        set
         {
-            Employee = employee;
-            Duty = duty;
-            SecuringObjectId = securingObjectId;
+            if (value == null)
+                throw new ArgumentException("Employee не может быть null.");
+            _employee = value;
         }
+    }
 
-        public Employee Employee
+    public DutySchedule Duty
+    {
+        get => _duty;
+        set
         {
-            get => _employee;
-            set
-            {
-                if (value == null)
-                    throw new ArgumentException("Employee не может быть null.");
-                _employee = value;
-            }
+            if (value == null)
+                throw new ArgumentException("Duty не может быть null.");
+            _duty = value;
         }
+    }
 
-        public DutySchedule Duty
+    public Guid SecuringObjectId
+    {
+        get => _securingObjectId;
+        set
         {
-            get => _duty;
-            set
-            {
-                if (value == null)
-                    throw new ArgumentException("Duty не может быть null.");
-                _duty = value;
-            }
-        }
-
-        public Guid SecuringObjectId
-        {
-            get => _securingObjectId;
-            set
-            {
-                if (value == Guid.Empty)
-                    throw new ArgumentException("SecuringObjectId не может быть пустым Guid.");
-                _securingObjectId = value;
-            }
+            if (value == Guid.Empty)
+                throw new ArgumentException("SecuringObjectId не может быть пустым Guid.");
+            _securingObjectId = value;
         }
     }
 }

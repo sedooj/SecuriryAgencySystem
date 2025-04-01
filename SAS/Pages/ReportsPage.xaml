@@ -6,9 +6,9 @@
              Title="Отчёты">
     <ContentPage.Content>
         <VerticalStackLayout Padding="10">
-            <Button Text="Сгенерировать график дежурств" Clicked="OnGenerateDutyScheduleClick" Margin="10"/>
-            <Button Text="Сгенерировать финансовый отчет" Clicked="OnGenerateFinancialReportClick" Margin="10"/>
-            <Button Text="Сгенерировать счет клиенту" Clicked="OnGenerateClientInvoiceClick" Margin="10"/>
+            <Button Text="Сгенерировать график дежурств" Clicked="OnGenerateDutyScheduleClick" Margin="10" />
+            <Button Text="Сгенерировать финансовый отчет" Clicked="OnGenerateFinancialReportClick" Margin="10" />
+            <Button Text="Сгенерировать счет клиенту" Clicked="OnGenerateClientInvoiceClick" Margin="10" />
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

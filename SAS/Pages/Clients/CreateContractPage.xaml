@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SAS.Pages.Clients.CreateContractPage"
              Title="Создание договора">
     <ContentPage.Content>
         <StackLayout Padding="10" Spacing="20">
-            <Label Text="Выберите объект"/>
-            <Picker x:Name="ObjectToSecurePicker"/>
-            <Label x:Name="GuardiansCountLabel" Text="Необходимое количество охранников: "/>
-            <Label x:Name="ContractAmountLabel" Text="Сумма договора: "/>
-            <Label Text="Дата и время начала действия договора"/>
+            <Label Text="Выберите объект" />
+            <Picker x:Name="ObjectToSecurePicker" />
+            <Label x:Name="GuardiansCountLabel" Text="Необходимое количество охранников: " />
+            <Label x:Name="ContractAmountLabel" Text="Сумма договора: " />
+            <Label Text="Дата и время начала действия договора" />
             <DatePicker x:Name="StartDatePicker" />
             <TimePicker x:Name="StartTimePicker" />
-            <Label Text="Дата и время окончания действия договора"/>
+            <Label Text="Дата и время окончания действия договора" />
             <DatePicker x:Name="EndDatePicker" />
             <TimePicker x:Name="EndTimePicker" />
-            <Button Text="Сохранить" Clicked="OnSaveContractButtonClicked"/>
-            <Button Text="Отмена" Clicked="OnCancelButtonClicked" BackgroundColor="DarkRed" TextColor="White"/>
+            <Button Text="Сохранить" Clicked="OnSaveContractButtonClicked" />
+            <Button Text="Отмена" Clicked="OnCancelButtonClicked" BackgroundColor="DarkRed" TextColor="White" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

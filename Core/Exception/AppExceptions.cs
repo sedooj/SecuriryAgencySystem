@@ -1,7 +1,7 @@
 namespace Core.Exception;
 
-using System;
+public class OnlySecurityOfficerCanHaveSpecialEquipmentException : System.Exception;
 
-public class OnlySecurityOfficerCanHaveSpecialEquipmentException : Exception;
-public class SecurityEquipmentNullException : Exception;
-public class UnsupportedDirectory : Exception;
+public class SecurityEquipmentNullException : System.Exception;
+
+public class UnsupportedDirectory : System.Exception;

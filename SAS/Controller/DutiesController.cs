@@ -1,10 +1,9 @@
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using Core.Impl;
-using Core.Service.Interface;
 using Core.Model;
 using Core.Model.Users;
 using Core.Service.Impl;
+using Core.Service.Interface;
 
 namespace SAS.Controller;
 
@@ -12,19 +11,26 @@ public class DutiesController : ITableController
 {
     private readonly IDutyScheduleService _dutyScheduleService = new DutyScheduleService();
 
-    public ObservableCollection<EmployeeDutySchedule> EmployeeDutySchedules { get; private set; } = [];
-
     public DutiesController()
     {
         UpdateTable();
     }
-    
+
+    public ObservableCollection<EmployeeDutySchedule> EmployeeDutySchedules { get; } = [];
+
+    public void UpdateTable()
+    {
+        var duties = GetEmployeeDutySchedules();
+        EmployeeDutySchedules.Clear();
+        foreach (var duty in duties) EmployeeDutySchedules.Add(duty);
+    }
+
     public List<Employee> GetAllEmployees()
     {
         var employeeService = new JsonDbService<Employee>();
         return employeeService.LoadEntities();
     }
-    
+
     public List<EmployeeDutySchedule> GetAllDuties()
     {
         return _dutyScheduleService.LoadAllDutySchedules();
@@ -56,15 +62,5 @@ public class DutiesController : ITableController
     private ObservableCollection<EmployeeDutySchedule> GetEmployeeDutySchedules()
     {
         return new ObservableCollection<EmployeeDutySchedule>(GetAllDuties());
-    }
-
-    public void UpdateTable()
-    {
-        var duties = GetEmployeeDutySchedules();
-        EmployeeDutySchedules.Clear();
-        foreach (var duty in duties)
-        {
-            EmployeeDutySchedules.Add(duty);
-        }
     }
 }

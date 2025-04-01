@@ -1,110 +1,99 @@
-namespace Core.Model
+namespace Core.Model;
+
+public class DutySchedule
 {
-    public class DutySchedule
+    private Schedule _schedule;
+    private string _scheduleType;
+
+    public DutySchedule(string scheduleType, Replacement? replacement, Schedule schedule)
     {
-        private string _scheduleType;
-        private Replacement? _replacement;
-        private Schedule _schedule;
+        ScheduleType = scheduleType;
+        Replacement = replacement;
+        Schedule = schedule;
+    }
 
-        public DutySchedule(string scheduleType, Replacement? replacement, Schedule schedule)
+    public string ScheduleType
+    {
+        get => _scheduleType;
+        set
         {
-            ScheduleType = scheduleType;
-            Replacement = replacement;
-            Schedule = schedule;
-        }
-
-        public string ScheduleType
-        {
-            get => _scheduleType;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 50)
-                    throw new ArgumentException("Тип расписания должен быть от 1 до 50 символов.");
-                _scheduleType = value;
-            }
-        }
-
-        public Replacement? Replacement
-        {
-            get => _replacement;
-            set => _replacement = value;
-        }
-
-        public Schedule Schedule
-        {
-            get => _schedule;
-            set
-            {
-                if (value == null)
-                    throw new ArgumentException("Schedule не может быть null.");
-                _schedule = value;
-            }
+            if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 50)
+                throw new ArgumentException("Тип расписания должен быть от 1 до 50 символов.");
+            _scheduleType = value;
         }
     }
 
-    public class Schedule
+    public Replacement? Replacement { get; set; }
+
+    public Schedule Schedule
     {
-        private DateTime _startDate;
-        private DateTime _endDate;
-
-        public Schedule(DateTime startDate, DateTime endDate)
+        get => _schedule;
+        set
         {
-            StartDate = startDate;
-            EndDate = endDate;
+            if (value == null)
+                throw new ArgumentException("Schedule не может быть null.");
+            _schedule = value;
         }
+    }
+}
 
-        public DateTime StartDate
-        {
-            get => _startDate;
-            set
-            {
-                if (value == default)
-                    throw new ArgumentException("StartDate не может быть пустым.");
-                _startDate = value;
-            }
-        }
+public class Schedule
+{
+    private DateTime _endDate;
+    private DateTime _startDate;
 
-        public DateTime EndDate
-        {
-            get => _endDate;
-            set
-            {
-                if (value == default)
-                    throw new ArgumentException("EndDate не может быть пустым.");
-                _endDate = value;
-            }
-        }
-
-        public string WorkingDate => $"{StartDate.ToShortDateString()} - {EndDate.ToShortDateString()}";
-        public string WorkingTime => $"{StartDate.ToShortTimeString()} - {EndDate.ToShortTimeString()}";
+    public Schedule(DateTime startDate, DateTime endDate)
+    {
+        StartDate = startDate;
+        EndDate = endDate;
     }
 
-    public class Replacement
+    public DateTime StartDate
     {
-        private Guid? _replacesEmployeeId;
-        private string? _replacementReason;
-
-        public Replacement(Guid? replacesEmployeeId, string? replacementReason)
+        get => _startDate;
+        set
         {
-            ReplacesEmployeeId = replacesEmployeeId;
-            ReplacementReason = replacementReason;
+            if (value == default)
+                throw new ArgumentException("StartDate не может быть пустым.");
+            _startDate = value;
         }
+    }
 
-        public Guid? ReplacesEmployeeId
+    public DateTime EndDate
+    {
+        get => _endDate;
+        set
         {
-            get => _replacesEmployeeId;
-            set => _replacesEmployeeId = value;
+            if (value == default)
+                throw new ArgumentException("EndDate не может быть пустым.");
+            _endDate = value;
         }
+    }
 
-        public string? ReplacementReason
+    public string WorkingDate => $"{StartDate.ToShortDateString()} - {EndDate.ToShortDateString()}";
+    public string WorkingTime => $"{StartDate.ToShortTimeString()} - {EndDate.ToShortTimeString()}";
+}
+
+public class Replacement
+{
+    private string? _replacementReason;
+
+    public Replacement(Guid? replacesEmployeeId, string? replacementReason)
+    {
+        ReplacesEmployeeId = replacesEmployeeId;
+        ReplacementReason = replacementReason;
+    }
+
+    public Guid? ReplacesEmployeeId { get; set; }
+
+    public string? ReplacementReason
+    {
+        get => _replacementReason;
+        set
         {
-            get => _replacementReason;
-            set
-            {
-                if (value != null && value.Length > 200)
-                    throw new ArgumentException("Причина замены не должна быть длиннее 200 символов.");
-                _replacementReason = value;
-            }
+            if (value != null && value.Length > 200)
+                throw new ArgumentException("Причина замены не должна быть длиннее 200 символов.");
+            _replacementReason = value;
         }
     }
 }

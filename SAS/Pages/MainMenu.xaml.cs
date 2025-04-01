@@ -1,7 +1,5 @@
 using Core.Service.Impl;
-using SAS.Controller;
 using SAS.Pages.Clients;
-using SAS.Pages.Duties;
 using SAS.Pages.Employees;
 
 namespace SAS.Pages;
@@ -9,7 +7,7 @@ namespace SAS.Pages;
 public partial class MainMenu : ContentPage
 {
     private readonly BaseDataLoader _baseDataLoader = new();
-    
+
     public MainMenu()
     {
         InitializeComponent();
@@ -35,5 +33,4 @@ public partial class MainMenu : ContentPage
         _baseDataLoader.ProcessLoadBaseData();
         LoadBaseDateButton.IsEnabled = _baseDataLoader.IsNeedToLoadBaseData;
     }
-    
 }

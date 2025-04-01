@@ -1,62 +1,61 @@
-namespace Core.Model
+namespace Core.Model;
+
+public class Payment
 {
-    public class Payment
+    private decimal _amount;
+    private Guid _id;
+    private Guid _payerId;
+    private DateTime _paymentDate;
+
+    public Payment(Guid id, Guid payerId, DateTime paymentDate, decimal amount)
     {
-        private Guid _id;
-        private Guid _payerId;
-        private DateTime _paymentDate;
-        private decimal _amount;
+        Id = id;
+        PayerId = payerId;
+        PaymentDate = paymentDate;
+        Amount = amount;
+    }
 
-        public Payment(Guid id, Guid payerId, DateTime paymentDate, decimal amount)
+    public Guid Id
+    {
+        get => _id;
+        set
         {
-            Id = id;
-            PayerId = payerId;
-            PaymentDate = paymentDate;
-            Amount = amount;
+            if (value == Guid.Empty)
+                throw new ArgumentException("Id не может быть пустым Guid.");
+            _id = value;
         }
+    }
 
-        public Guid Id
+    public Guid PayerId
+    {
+        get => _payerId;
+        set
         {
-            get => _id;
-            set
-            {
-                if (value == Guid.Empty)
-                    throw new ArgumentException("Id не может быть пустым Guid.");
-                _id = value;
-            }
+            if (value == Guid.Empty)
+                throw new ArgumentException("PayerId не может быть пустым Guid.");
+            _payerId = value;
         }
+    }
 
-        public Guid PayerId
+    public DateTime PaymentDate
+    {
+        get => _paymentDate;
+        set
         {
-            get => _payerId;
-            set
-            {
-                if (value == Guid.Empty)
-                    throw new ArgumentException("PayerId не может быть пустым Guid.");
-                _payerId = value;
-            }
+            if (value == default)
+                throw new ArgumentException("Дата оплаты не может быть пустой.");
+            _paymentDate = value;
         }
+    }
 
-        public DateTime PaymentDate
+    public decimal Amount
+    {
+        get => _amount;
+        set
         {
-            get => _paymentDate;
-            set
-            {
-                if (value == default)
-                    throw new ArgumentException("Дата оплаты не может быть пустой.");
-                _paymentDate = value;
-            }
-        }
-
-        public decimal Amount
-        {
-            get => _amount;
-            set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("Сумма оплаты должна быть больше 0.");
-                _amount = value;
-            }
+            if (value <= 0)
+                throw new ArgumentException("Сумма оплаты должна быть больше 0.");
+            _amount = value;
         }
     }
 }

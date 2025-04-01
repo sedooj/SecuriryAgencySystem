@@ -1,4 +1,3 @@
-using Core.Model;
 using Core.Service.Impl;
 
 namespace Core.Service.Interface;

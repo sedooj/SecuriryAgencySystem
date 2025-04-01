@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SAS.Pages.Clients.ClientsPage"
              Title="Клиенты">
     <ContentPage.Content>
-        <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <StackLayout Padding="10" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <StackLayout Orientation="Horizontal" Spacing="50">
-                <Button Text="Частные клиенты" Clicked="OnIndividualClientsButtonClicked" WidthRequest="250" HeightRequest="150"/>
-                <Button Text="Юридические лица" Clicked="OnCorporateClientsButtonClicked" WidthRequest="250" HeightRequest="150"/>
+                <Button Text="Частные клиенты" Clicked="OnIndividualClientsButtonClicked" WidthRequest="250"
+                        HeightRequest="150" />
+                <Button Text="Юридические лица" Clicked="OnCorporateClientsButtonClicked" WidthRequest="250"
+                        HeightRequest="150" />
+                <Button Text="Объекты" Clicked="OnObjectsButtonClicked" WidthRequest="250" 
+                        HeightRequest="150" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

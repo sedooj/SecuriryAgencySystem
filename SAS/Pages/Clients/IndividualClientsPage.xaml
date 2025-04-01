@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SAS.Pages.Clients.IndividualClientsPage"
@@ -6,21 +7,24 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="10">
-                <Button Text="Добавить клиента" Clicked="OnAddClientClicked"/>
+                <Button Text="Добавить клиента" Clicked="OnAddClientClicked" />
 
                 <Grid Padding="10" ColumnDefinitions="*,*,*">
-                    <Label Grid.Column="0" Text="ФИО" FontAttributes="Bold"/>
-                    <Label Grid.Column="1" Text="ID Контракта" FontAttributes="Bold"/>
-                    <Label Grid.Column="2" Text="" FontAttributes="Bold"/>
+                    <Label Grid.Column="0" Text="ФИО" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="ID Контракта" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="" FontAttributes="Bold" />
                 </Grid>
 
                 <CollectionView x:Name="IndividualClientsList">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10" ColumnDefinitions="*,*,*">
-                                <Label Grid.Column="0" Text="{Binding Passport.FullName}" FontAttributes="Bold" VerticalOptions="Center"/>
-                                <Label Grid.Column="1" Text="{Binding ContractId}" VerticalOptions="Center"/>
-                                <ImageButton Grid.Column="2" BindingContext="{Binding}" HorizontalOptions="End" Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center"/>
+                                <Label Grid.Column="0" Text="{Binding Passport.FullName}" FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding ContractId}" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" BindingContext="{Binding}" HorizontalOptions="End"
+                                             Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25"
+                                             HeightRequest="25" VerticalOptions="Center" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

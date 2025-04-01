@@ -2,8 +2,14 @@ namespace Core.Model;
 
 public class Weapon
 {
-    private Guid _id;
     private string _brand;
+    private Guid _id;
+
+    public Weapon(Guid id, string brand)
+    {
+        Id = id;
+        Brand = brand;
+    }
 
     public Guid Id
     {
@@ -25,11 +31,5 @@ public class Weapon
                 throw new ArgumentException("Бренд не может быть пустым.");
             _brand = value;
         }
-    }
-
-    public Weapon(Guid id, string brand)
-    {
-        Id = id;
-        Brand = brand;
     }
 }

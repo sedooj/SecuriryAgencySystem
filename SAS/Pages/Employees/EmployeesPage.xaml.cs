@@ -1,63 +1,69 @@
-using System.Diagnostics;
 using Core.Model.Users;
 using SAS.Controller;
 
-namespace SAS.Pages.Employees
+namespace SAS.Pages.Employees;
+
+public partial class EmployeesPage : ContentPage, IPage
 {
-    public partial class EmployeesPage : ContentPage, IPage
+    private readonly EmployeeController _controller = new();
+
+    public EmployeesPage()
     {
-        private readonly EmployeeController _controller = new();
+        InitializeComponent();
+        Init();
+        Bind();
+    }
 
-        public EmployeesPage()
-        {
-            InitializeComponent();
-            Init();
-            Bind();
-        }
+    public void Init()
+    {
+        BindingContext = this;
+    }
 
-        public void Init()
-        {
-            BindingContext = this;
-        }
+    public void Bind()
+    {
+        EmployeesList.ItemsSource = _controller.Employees;
+    }
 
-        public void Bind()
-        {
-            EmployeesList.ItemsSource = _controller.Employees;
-        }
-
-        private async void OnAddEmployeeClicked(object sender, EventArgs e)
+    private async void OnAddEmployeeClicked(object sender, EventArgs e)
+    {
+        try
         {
             var addEmployeePage = new AddEmployeePage();
-            addEmployeePage.EmployeeAdded += (s, newEmployee) =>
-            {
-                _controller.AddEmployee(newEmployee);
-            };
+            addEmployeePage.EmployeeAdded += (s, newEmployee) => { _controller.AddEmployee(newEmployee); };
             await Navigation.PushAsync(addEmployeePage);
         }
-
-        private void OnEditEmployeeClicked(object sender, EventArgs e)
+        catch (InvalidOperationException ex)
         {
-            if (EmployeesList.SelectedItem is not Employee selectedEmployee) return;
-            selectedEmployee.JobRole.Position = "Старший менеджер";
-            _controller.UpdateEmployee(selectedEmployee);
+            await DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
         }
-
-        private void OnDismissEmployeeClicked(object sender, EventArgs e)
+        catch (ArgumentNullException ex)
         {
-            if (EmployeesList.SelectedItem is not Employee selectedEmployee) return;
-            _controller.RemoveEmployee(selectedEmployee);
+            await DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
         }
-
-        private void OnDeleteEmployeeClicked(object sender, EventArgs e)
+        catch (Exception ex)
         {
-            if (EmployeesList.SelectedItem is not Employee selectedEmployee) return;
-            _controller.RemoveEmployee(selectedEmployee);
+            await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
         }
-
-        private async void OnViewButtonClicked(object sender, EventArgs e)
+    }
+    
+    private async void OnViewButtonClicked(object sender, EventArgs e)
+    {
+        try
         {
             if ((sender as ImageButton)?.BindingContext is not Employee selectedEmployee) return;
             await Navigation.PushModalAsync(new ViewEmployeePage(selectedEmployee));
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
+        }
+        catch (ArgumentNullException ex)
+        {
+            await DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
         }
     }
 }

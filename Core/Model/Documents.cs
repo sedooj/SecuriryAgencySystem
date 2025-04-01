@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Core.Model;
 
 public class Documents
@@ -27,7 +29,7 @@ public class Documents
         get => _inn;
         set
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(value, @"^\d{10}$"))
+            if (!Regex.IsMatch(value, @"^\d{10}$"))
                 throw new ArgumentException("ИНН Должен быть 10-значным числом.");
             _inn = value;
         }

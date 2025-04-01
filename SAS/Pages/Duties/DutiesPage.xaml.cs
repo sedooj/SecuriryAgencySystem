@@ -1,28 +1,25 @@
 using SAS.Controller;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace SAS.Pages.Duties
+namespace SAS.Pages.Duties;
+
+public partial class DutiesPage : ContentView
 {
-    public partial class DutiesPage : ContentView
+    private readonly DutiesController _dutiesController = new();
+
+    public DutiesPage()
     {
-        private readonly DutiesController _dutiesController = new();
+        InitializeComponent();
+        LoadDuties();
+    }
 
-        public DutiesPage()
-        {
-            InitializeComponent();
-            LoadDuties();
-        }
+    private void LoadDuties()
+    {
+        _dutiesController.UpdateTable();
+        DutiesCollectionView.ItemsSource = _dutiesController.EmployeeDutySchedules;
+    }
 
-        private void LoadDuties()
-        {
-            _dutiesController.UpdateTable();
-            DutiesCollectionView.ItemsSource = _dutiesController.EmployeeDutySchedules;
-        }
-        
-        private void OnRefreshClicked(object sender, EventArgs e)
-        {
-            LoadDuties();
-        }
+    private void OnRefreshClicked(object sender, EventArgs e)
+    {
+        LoadDuties();
     }
 }
