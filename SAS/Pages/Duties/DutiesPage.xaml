@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SAS.Pages.Duties.DutiesPage"
+             Title="Дежурства">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Button Text="Добавить дежурство" Clicked="OnAddDutyButtonClicked"/>
+            <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+                <Label Grid.Column="0" Text="Охранник" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="Дата дежурства" FontAttributes="Bold"/>
+                <Label Grid.Column="2" Text="Время дежурства" FontAttributes="Bold"/>
+                <Label Grid.Column="3" Text="Объект" FontAttributes="Bold"/>
+                <Label Grid.Column="4" Text="" FontAttributes="Bold"/>
+            </Grid>
+            <CollectionView x:Name="DutiesCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+                            <Label Grid.Column="0" Text="{Binding Employee.Passport.FullName}" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Duty.Schedule.WorkingDate}" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Duty.Schedule.WorkingTime}" VerticalOptions="Center"/>
+                            <Label Grid.Column="3" Text="{Binding Employee.SecuringObjectName}" VerticalOptions="Center"/>
+                            <ImageButton Grid.Column="4" BindingContext="{Binding}" HorizontalOptions="End" Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

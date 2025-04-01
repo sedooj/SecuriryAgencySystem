@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS", "SAS\SAS.csproj", "{97BAB6B1-C021-4393-BB6D-844475E2F863}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{1ECD2E15-28FF-4ED8-9A83-6D80FB1808E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{97BAB6B1-C021-4393-BB6D-844475E2F863}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97BAB6B1-C021-4393-BB6D-844475E2F863}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97BAB6B1-C021-4393-BB6D-844475E2F863}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ECD2E15-28FF-4ED8-9A83-6D80FB1808E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ECD2E15-28FF-4ED8-9A83-6D80FB1808E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ECD2E15-28FF-4ED8-9A83-6D80FB1808E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ECD2E15-28FF-4ED8-9A83-6D80FB1808E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -60,5 +60,29 @@
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1"/>
     </ItemGroup>
-
+    
+    <ItemGroup>
+        <ProjectReference Include="..\Core\Core.csproj"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <MauiXaml Update="Pages\Employees\EmployeesPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Update="Pages\Employees\EmployeesPage.xaml.cs">
+        <DependentUpon>EmployeesPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\Clients\ViewIndividualClientPage.xaml.cs">
+        <DependentUpon>ViewIndividualClientPage.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Employees\EmployeesPage.xaml" />
+    </ItemGroup>
+    
 </Project>
