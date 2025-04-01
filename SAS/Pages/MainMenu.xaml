@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:duties="clr-namespace:SAS.Pages.Duties"
              x:Class="SAS.Pages.MainMenu"
              Title="Главное меню">
     <ContentPage.Content>
@@ -14,8 +14,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Frame Grid.Row="0" CornerRadius="10" BorderColor="White" Padding="20">
-                <Label Text="Информация" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Frame Grid.Row="0" CornerRadius="10" BorderColor="White" BackgroundColor="Transparent" Padding="20">
+                <duties:DutiesPage />
             </Frame>
 
             <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
@@ -24,14 +24,13 @@
                     <Button Text="Клиенты" WidthRequest="200" HeightRequest="70" Clicked="OnClientsButtonClicked"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
-                    <Button Text="Дежурства" WidthRequest="200" HeightRequest="70" Clicked="OnDutiesButtonClicked"/>
                     <Button Text="Отчёты" WidthRequest="200" HeightRequest="70" Clicked="OnReportsButtonClicked"/>
                 </StackLayout>
             </StackLayout>
             
             <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
                 <ImageButton x:Name="LoadBaseDateButton" Source="load_data.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnLoadBaseDataClicked"/>
-                <ImageButton Source="settings.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnSettingsButtonClicked"/>
+                <!-- <ImageButton Source="settings.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnSettingsButtonClicked"/> -->
             </StackLayout>
         </Grid>
     </ContentPage.Content>

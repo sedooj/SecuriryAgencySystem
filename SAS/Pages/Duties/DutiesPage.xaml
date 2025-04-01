@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SAS.Pages.Duties.DutiesPage"
-             Title="Дежурства">
-    <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Button Text="Добавить дежурство" Clicked="OnAddDutyButtonClicked"/>
-            <Grid Padding="10" ColumnDefinitions="*,*,*,*">
-                <Label Grid.Column="0" Text="Охранник" FontAttributes="Bold"/>
-                <Label Grid.Column="1" Text="Дата дежурства" FontAttributes="Bold"/>
-                <Label Grid.Column="2" Text="Время дежурства" FontAttributes="Bold"/>
-                <Label Grid.Column="3" Text="Объект" FontAttributes="Bold"/>
-                <Label Grid.Column="4" Text="" FontAttributes="Bold"/>
-            </Grid>
+             x:Class="SAS.Pages.Duties.DutiesPage">
+    <StackLayout Padding="10">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="Активные дежурства" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
+            <ImageButton Source="refresh.png" Clicked="OnRefreshClicked" WidthRequest="30" HeightRequest="30" HorizontalOptions="End" VerticalOptions="Center"/>
+        </StackLayout>
+        <BoxView HeightRequest="1" Color="LightGray" Margin="0,10,0,10"/>
+        <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+            <Label Grid.Column="0" Text="Охранник" FontAttributes="Bold"/>
+            <Label Grid.Column="1" Text="Дата дежурства" FontAttributes="Bold"/>
+            <Label Grid.Column="2" Text="Время дежурства" FontAttributes="Bold"/>
+            <Label Grid.Column="3" Text="Объект" FontAttributes="Bold"/>
+        </Grid>
+        <ScrollView>
             <CollectionView x:Name="DutiesCollectionView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -21,11 +22,10 @@
                             <Label Grid.Column="1" Text="{Binding Duty.Schedule.WorkingDate}" VerticalOptions="Center"/>
                             <Label Grid.Column="2" Text="{Binding Duty.Schedule.WorkingTime}" VerticalOptions="Center"/>
                             <Label Grid.Column="3" Text="{Binding Employee.SecuringObjectName}" VerticalOptions="Center"/>
-                            <ImageButton Grid.Column="4" BindingContext="{Binding}" HorizontalOptions="End" Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+        </ScrollView>
+    </StackLayout>
+</ContentView>
