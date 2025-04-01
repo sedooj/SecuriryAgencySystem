@@ -27,11 +27,13 @@
                 </StackLayout>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalOptions="End">
                 <ImageButton x:Name="LoadBaseDateButton" Source="load_data.png" Padding="5" BorderWidth="1"
-                             BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End"
+                             BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="Center"
                              VerticalOptions="End" Clicked="OnLoadBaseDataClicked" />
-                <!-- <ImageButton Source="settings.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnSettingsButtonClicked"/> -->
+                <ImageButton x:Name="DropDataButton" Source="drop_data.png" Padding="5" BorderWidth="1"
+                             BorderColor="DarkRed" WidthRequest="50" HeightRequest="50" HorizontalOptions="EndAndExpand"
+                             VerticalOptions="End" Clicked="OnDropDataButtonClicked" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

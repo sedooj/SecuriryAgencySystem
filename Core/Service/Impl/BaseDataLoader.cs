@@ -11,6 +11,25 @@ public class BaseDataLoader
     private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
     private readonly IDbService<IndividualClient> _individualClientDbService = new JsonDbService<IndividualClient>();
     private readonly IDbService<SecuredObject> _securedObjectDbService = new JsonDbService<SecuredObject>();
+    
+    private readonly IDbService<Person> _personDbService = new JsonDbService<Person>();
+    private readonly IDbService<Weapon> _weaponDbService = new JsonDbService<Weapon>();
+    private readonly IDbService<Payment> _paymentDbService = new JsonDbService<Payment>();
+    private readonly IDbService<Contract> _contractDbService = new JsonDbService<Contract>();
+    
+    public void DropAll()
+    {
+        _corporateClientDbService.DeleteAll();
+        _individualClientDbService.DeleteAll();
+        _employeeDbService.DeleteAll();
+        _securedObjectDbService.DeleteAll();
+        _personDbService.DeleteAll();
+        _weaponDbService.DeleteAll();
+        _paymentDbService.DeleteAll();
+        _contractDbService.DeleteAll();
+        IsNeedToLoadBaseData = true;
+    }
+    
     public bool IsNeedToLoadBaseData { get; private set; }
 
     public void ProcessLoadBaseData()
@@ -134,4 +153,5 @@ public class BaseDataLoader
                 individualClients[2].Id, OwnerType.Individual)
         };
     }
+    
 }

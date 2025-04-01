@@ -31,6 +31,10 @@ public partial class MainMenu : ContentPage
     private void OnLoadBaseDataClicked(object sender, EventArgs e)
     {
         _baseDataLoader.ProcessLoadBaseData();
-        LoadBaseDateButton.IsEnabled = _baseDataLoader.IsNeedToLoadBaseData;
+    }
+    
+    private void OnDropDataButtonClicked(object sender, EventArgs e)
+    {
+        _baseDataLoader.DropAll();
     }
 }
