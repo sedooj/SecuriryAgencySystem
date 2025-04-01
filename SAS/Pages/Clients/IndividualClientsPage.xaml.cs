@@ -28,6 +28,8 @@ public partial class IndividualClientsPage : ContentPage
     private async void OnViewButtonClicked(object sender, EventArgs e)
     {
         if ((sender as ImageButton)?.BindingContext is not IndividualClient selectedClient) return;
-        await Navigation.PushModalAsync(new ViewIndividualClientPage(selectedClient));
+        var viewClientPage = new ViewIndividualClientPage(selectedClient);
+        viewClientPage.ContractConcluded += (s, concluded) => { _controller.UpdateTable(); };
+        await Navigation.PushAsync(viewClientPage);
     }
 }

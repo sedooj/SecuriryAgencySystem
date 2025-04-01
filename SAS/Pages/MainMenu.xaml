@@ -28,9 +28,9 @@
                     <Button Text="Отчёты" WidthRequest="200" HeightRequest="70" Clicked="OnReportsButtonClicked"/>
                 </StackLayout>
             </StackLayout>
-
-            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalOptions="End">
-                <ImageButton Source="secured_object.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnCreateSecuredObjectButtonClicked"/>
+            
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
+                <ImageButton x:Name="LoadBaseDateButton" Source="load_data.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnLoadBaseDataClicked"/>
                 <ImageButton Source="settings.png" Padding="5" BorderWidth="1" BorderColor="LightGray" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End" Clicked="OnSettingsButtonClicked"/>
             </StackLayout>
         </Grid>

@@ -33,6 +33,7 @@ public class PathBuilder
             not null when type == typeof(Person) => "persons",
             not null when type == typeof(Weapon) => "weapons",
             not null when type == typeof(SecuredObject) => "secured_objects",
+            not null when type == typeof(Payment) => "payments",
             _ => throw new NullReferenceException($"Can't find table for type: {type}")
         };
         return typeDir;

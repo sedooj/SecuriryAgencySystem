@@ -56,13 +56,13 @@ public class EmployeeController : ITableController
 
     public void RemoveEmployee(Employee employee)
     {
-        _employeeDbService.DeleteEntity(employee.EmployeeId);
+        _employeeDbService.DeleteEntity(employee.Id);
         RemoveRecord(employee);
     }
 
     public void UpdateEmployee(Employee employee)
     {
-        _employeeDbService.UpdateEntity(employee.EmployeeId, employee);
+        _employeeDbService.UpdateEntity(employee.Id, employee);
         UpdateRecord(employee);
     }
 }

@@ -28,7 +28,7 @@ namespace SAS.Pages.Employees
 
             Employee newEmployee = new Employee(
                 new Passport(PassportSeriesEntry.Text, PassportNumberEntry.Text, PassportIssueDatePicker.Date,
-                    FirstNameEntry.Text, LastNameEntry.Text, MiddleNameEntry.Text, GenderEntry.Text, CountryEntry.Text),Guid.NewGuid(),Guid.NewGuid(), Guid.NewGuid(), new JobRole(PositionEntry.Text, selectedRole),
+                    FirstNameEntry.Text, LastNameEntry.Text, MiddleNameEntry.Text, GenderEntry.Text, CountryEntry.Text),Guid.NewGuid(),Guid.NewGuid(), new JobRole(PositionEntry.Text, selectedRole),
                 new Documents(AddressEntry.Text, InnEntry.Text), null, null, null, null, null);
 
             EmployeeAdded?.Invoke(this, newEmployee);

@@ -12,6 +12,7 @@
             <Label x:Name="GenderLabel"/>
             <Label x:Name="CountryLabel"/>
             <Label x:Name="ContractIdLabel"/>
+            <Button x:Name="CreateContractButton" Text="Заключить договор" Clicked="OnCreateContractButtonClicked"/>
             <Button Text="Закрыть" Clicked="OnCloseButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>

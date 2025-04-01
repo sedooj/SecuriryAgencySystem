@@ -38,6 +38,11 @@ public class IndividualClientController : ITableController
 
     public void UpdateTable()
     {
-        IndividualClients = GetIndividualClients();
+        var clients = GetIndividualClients();
+        IndividualClients.Clear();
+        foreach (var client in clients)
+        {
+            IndividualClients.Add(client);
+        }
     }
 }

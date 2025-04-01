@@ -9,4 +9,5 @@ public interface IContractService
     void ArchiveContract(Guid contractId);
     void LinkContractToClient(Guid contractId, Guid clientId, Type clientType);
     void PayContract(Guid contractId, Guid payerId, decimal amount);
+    decimal CalculateContractAmount(SecuredObject securedObject);
 }

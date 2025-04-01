@@ -18,6 +18,6 @@ public partial class ViewCorporateClientPage : ContentPage
 
     private void OnCloseButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PopModalAsync();
+        Navigation.PopAsync();
     }
 }

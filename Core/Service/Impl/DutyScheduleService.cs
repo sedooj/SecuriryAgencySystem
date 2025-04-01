@@ -9,7 +9,7 @@ namespace Core.Service.Impl;
 
 public class DutyScheduleService : IDutyScheduleService
 {
-    private readonly IDbService<Employee> _employeeDbService = new EmployeesDbService();
+    private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
     private readonly IDbService<SecuredObject> _securedObjectDbService = new JsonDbService<SecuredObject>();
     
     public EmployeeDutySchedule CreateDutySchedule(Guid guardId, DutySchedule schedule, Guid securingObjectId)

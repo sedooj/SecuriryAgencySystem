@@ -46,7 +46,7 @@ namespace SAS.Pages.Duties
             }
             else
             {
-                await DisplayAlert("Ошибка", "Пожалуйста, выберите ох��анника и объект", "OK");
+                await DisplayAlert("Ошибка", "Пожалуйста, выберите охранника и объект", "OK");
             }
         }
 

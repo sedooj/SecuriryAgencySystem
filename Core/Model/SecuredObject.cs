@@ -8,6 +8,9 @@ public class SecuredObject
     public double Area { get; set; }
     public SecurityLevel SecurityLevel { get; set; }
     public int GuardiansCount { get; set; }
+    public Guid? OwnerId { get; set; }
+    public bool IsOwned => OwnerId != null;
+    public OwnerType? OwnerType { get; set; }
 
     private int CalculateGuardiansCount()
     {
@@ -21,7 +24,7 @@ public class SecuredObject
         };
     }
 
-    public SecuredObject(Guid id, string name, string address, double area, SecurityLevel securityLevel)
+    public SecuredObject(Guid id, string name, string address, double area, SecurityLevel securityLevel, Guid? ownerId, OwnerType? ownerType)
     {
         Id = id;
         Name = name;
@@ -29,6 +32,8 @@ public class SecuredObject
         Area = area;
         SecurityLevel = securityLevel;
         GuardiansCount = CalculateGuardiansCount();
+        OwnerId = ownerId;
+        OwnerType = ownerType;
     }
 }
 
@@ -38,4 +43,10 @@ public enum SecurityLevel
     Medium,   // Средний уровень охраны (пл. объекта от 500кв.м до 1000кв.м)
     High,     // Высокий уровень охраны (пл. объекта от 1000кв.м до 3000кв.м)
     Hard      // Уровень повышенной охраны (пл. объекта >3000 кв.м)
+}
+
+public enum OwnerType
+{
+    Individual,
+    Corp
 }

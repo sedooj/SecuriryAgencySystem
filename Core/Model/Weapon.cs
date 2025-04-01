@@ -1,7 +1,7 @@
 namespace Core.Model;
 
-public class Weapon(string brand, Guid registrationNumber)
+public class Weapon(Guid id, string brand)
 {
+    public Guid Id { get; set; } = id;
     public string Brand { get; } = brand;
-    public Guid RegistrationNumber { get; set; } = registrationNumber;
 }
