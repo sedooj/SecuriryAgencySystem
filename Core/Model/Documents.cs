@@ -19,7 +19,7 @@ public class Documents
         set
         {
             if (string.IsNullOrWhiteSpace(value) || value.Length < 1 || value.Length > 200)
-                throw new ArgumentException("Адресс должен быть длиной от 1 до 200 символов.");
+                throw new ArgumentException("Адрес должен быть длиной от 1 до 200 символов.");
             _address = value;
         }
     }
