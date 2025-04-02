@@ -22,9 +22,9 @@
                                 <Label Grid.Column="0" Text="{Binding Passport.FullName}" FontAttributes="Bold"
                                        VerticalOptions="Center" />
                                 <Label Grid.Column="1" Text="{Binding ContractId}" VerticalOptions="Center" />
-                                <ImageButton Grid.Column="2" BindingContext="{Binding}" HorizontalOptions="End"
-                                             Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25"
-                                             HeightRequest="25" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" Source="view.png" Clicked="OnViewButtonClicked"
+                                             BindingContext="{Binding }" WidthRequest="25" HeightRequest="25"
+                                             VerticalOptions="Center" HorizontalOptions="End"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

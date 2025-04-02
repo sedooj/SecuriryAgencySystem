@@ -45,7 +45,7 @@ public partial class EmployeesPage : ContentPage, IPage
             await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
         }
     }
-    
+
     private async void OnViewButtonClicked(object sender, EventArgs e)
     {
         try
@@ -64,6 +64,21 @@ public partial class EmployeesPage : ContentPage, IPage
         catch (Exception ex)
         {
             await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
+        }
+    }
+
+    private async void OnDeleteEmployeeClicked(object sender, EventArgs e)
+    {
+        if (sender is ImageButton { BindingContext: Employee employee })
+        {
+            try
+            {
+                _controller.RemoveEmployee(employee);
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Ошибка", $"{exception.Message}", "OK");
+            }
         }
     }
 }

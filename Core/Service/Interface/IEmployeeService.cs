@@ -11,4 +11,6 @@ public interface IEmployeeService
     void AssignSpecialEquipment(Employee employee, Guid equipment);
     void UnassignWeapon(Employee employee, Guid weaponId);
     void UnassignSpecialEquipment(Employee employee, Guid equipment);
+    void FireEmployee(Guid employeeId);
+    List<FiredEmployee> LoadFiredEmployees();
 }
