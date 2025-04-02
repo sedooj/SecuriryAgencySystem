@@ -9,22 +9,26 @@
             <StackLayout Padding="10">
                 <Button Text="Добавить сотрудника" Clicked="OnAddEmployeeClicked" />
 
-                <Grid Padding="10" ColumnDefinitions="*,*,*">
+                <Grid Padding="10" ColumnDefinitions="*,*,*,Auto">
                     <Label Grid.Column="0" Text="ФИО" FontAttributes="Bold" />
                     <Label Grid.Column="1" Text="Должность" FontAttributes="Bold" />
                     <Label Grid.Column="2" Text="" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="" FontAttributes="Bold" />
                 </Grid>
 
                 <CollectionView x:Name="EmployeesList">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="10" ColumnDefinitions="*,*,*">
+                            <Grid Padding="10" ColumnDefinitions="*,*,*,Auto">
                                 <Label Grid.Column="0" Text="{Binding Passport.FullName}" FontAttributes="Bold"
                                        VerticalOptions="Center" />
                                 <Label Grid.Column="1" Text="{Binding JobRole.Position}" VerticalOptions="Center" />
-                                <ImageButton Grid.Column="2" BindingContext="{Binding}" HorizontalOptions="End"
-                                             Source="view.png" Clicked="OnViewButtonClicked" WidthRequest="25"
-                                             HeightRequest="25" VerticalOptions="Center" />
+                                <ImageButton Grid.Column="2" Source="view.png" Clicked="OnViewButtonClicked"
+                                             BindingContext="{Binding }" WidthRequest="25" HeightRequest="25"
+                                             VerticalOptions="Center" />
+                                <ImageButton Grid.Column="3" Source="delete.png" Clicked="OnDeleteEmployeeClicked"
+                                             BindingContext="{Binding }" WidthRequest="25" HeightRequest="25"
+                                             VerticalOptions="Center" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

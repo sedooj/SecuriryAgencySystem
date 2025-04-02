@@ -10,6 +10,7 @@ namespace Core.Service.Impl;
 public class EmployeeService : IEmployeeService
 {
     private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
+    private readonly IDbService<FiredEmployee> _firedEmployeeDbService = new JsonDbService<FiredEmployee>();
 
     public decimal CalculateSalary(Employee employee)
     {
@@ -51,5 +52,24 @@ public class EmployeeService : IEmployeeService
         if (employee.SpecialEquipments == null) throw new SecurityEquipmentNullException();
         employee.SpecialEquipments.Remove(equipment);
         _employeeDbService.UpdateEntity(employee.Id, employee);
+    }
+    
+    public List<FiredEmployee> LoadFiredEmployees()
+    {
+        return _firedEmployeeDbService.LoadEntities();
+    }
+
+    public void FireEmployee(Guid employeeId)
+    {
+        var employee = _employeeDbService.LoadEntity(employeeId);
+        if (employee == null) throw new NullReferenceException("Employee not found");
+        var firedEmployee = new FiredEmployee(employee.Passport, employee.Id, employee.LicenseId, employee.JobRole, employee.Documents, employee.SpecialEquipments, employee.Weapons, employee.Schedule, null, null)
+        {
+            FiredDate = DateTime.Now,
+            Reason = "Сокращение",
+            Comment = ""
+        };
+        _firedEmployeeDbService.SaveEntity(firedEmployee);
+        _employeeDbService.DeleteEntity(employeeId);
     }
 }

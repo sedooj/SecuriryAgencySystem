@@ -37,4 +37,9 @@ public partial class MainMenu : ContentPage
     {
         _baseDataLoader.DropAll();
     }
+    
+    private async void OnArchiveButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ArchivePage());
+    }
 }

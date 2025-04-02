@@ -24,6 +24,7 @@
                     <Button Text="Сотрудники" WidthRequest="200" HeightRequest="70" Clicked="OnEmployeesButtonClicked" />
                     <Button Text="Клиенты" WidthRequest="200" HeightRequest="70" Clicked="OnClientsButtonClicked" />
                     <Button Text="Отчёты" WidthRequest="200" HeightRequest="70" Clicked="OnReportsButtonClicked" />
+                    <Button Text="Архив" WidthRequest="200" HeightRequest="70" Clicked="OnArchiveButtonClicked" />
                 </StackLayout>
             </StackLayout>
 

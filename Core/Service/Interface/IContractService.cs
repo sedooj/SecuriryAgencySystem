@@ -12,4 +12,5 @@ public interface IContractService
     decimal CalculateContractAmount(SecuredObject securedObject);
     void ProcessCreateContract(Contract contract, Type clientType);
     Contract AssignStaffToContract(Contract contract, List<Guid> securities);
+    void FindReplacementForFiredEmployee(Guid employeeId);
 }

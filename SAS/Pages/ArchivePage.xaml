@@ -1,0 +1,29 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SAS.Pages.ArchivePage"
+             Title="Архив уволенных сотрудников">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+                    <Label Grid.Column="0" Text="Имя" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="ID" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="Дата увольнения" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="Причина" FontAttributes="Bold" />
+                </Grid>
+                <CollectionView x:Name="FiredEmployeesList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+                                <Label Grid.Column="0" Text="{Binding Passport.FullName}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding Id}" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Text="{Binding FiredDate}" VerticalOptions="Center" />
+                                <Label Grid.Column="3" Text="{Binding Reason}" VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
