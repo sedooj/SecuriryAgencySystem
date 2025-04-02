@@ -2,13 +2,15 @@ using System.Collections.ObjectModel;
 using Core.Impl;
 using Core.Interface;
 using Core.Model.Users;
+using Core.Service.Impl;
+using Core.Service.Interface;
 
 namespace SAS.Controller;
 
 public class EmployeeController : ITableController
 {
     private readonly IDbService<Employee> _employeeDbService = new JsonDbService<Employee>();
-
+    private readonly IContractService _contractService = new ContractService();
     public EmployeeController()
     {
         UpdateTable();
@@ -53,6 +55,7 @@ public class EmployeeController : ITableController
 
     public void RemoveEmployee(Employee employee)
     {
+        _contractService.FindReplacementForFiredEmployee(employee.Id);
         _employeeDbService.DeleteEntity(employee.Id);
         RemoveRecord(employee);
     }

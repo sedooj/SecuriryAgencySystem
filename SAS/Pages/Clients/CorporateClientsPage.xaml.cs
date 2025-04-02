@@ -26,14 +26,6 @@ public partial class CorporateClientsPage : ContentPage
             addClientPage.ClientAdded += (s, newClient) => { _controller.AddClient(newClient); };
             await Navigation.PushAsync(addClientPage);
         }
-        catch (InvalidOperationException ex)
-        {
-            await DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
-        }
-        catch (ArgumentNullException ex)
-        {
-            await DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
-        }
         catch (Exception ex)
         {
             await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
@@ -48,14 +40,6 @@ public partial class CorporateClientsPage : ContentPage
             var viewClientPage = new ViewCorporateClientPage(selectedClient);
             viewClientPage.ContractConcluded += (s, concluded) => { _controller.UpdateTable(); };
             await Navigation.PushAsync(viewClientPage);
-        }
-        catch (InvalidOperationException ex)
-        {
-            await DisplayAlert("Ошибка", $"Ошибка выполнения операции: {ex.Message}", "OK");
-        }
-        catch (ArgumentNullException ex)
-        {
-            await DisplayAlert("Ошибка", $"Отсутствует необходимый аргумент: {ex.Message}", "OK");
         }
         catch (Exception ex)
         {

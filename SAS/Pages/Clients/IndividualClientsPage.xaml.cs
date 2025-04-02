@@ -62,4 +62,5 @@ public partial class IndividualClientsPage : ContentPage
             await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "OK");
         }
     }
+
 }
